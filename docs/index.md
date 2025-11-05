@@ -12,7 +12,7 @@ Follow these steps to get started:
 1. [Login & Account Setup](login.md)
 2. [Upload Files](file-uploads.md)
 3. [Convert to SISF Format](file-conversion.md)
-4. [Scence Viewer](image-display-window-operations.md)
+4. [Scence Viewer](scene-display-window-operations.md)
 5. [Basic Image Adjustments](basic-image-adjustments.md)
 6. [Manage Image Library](image-library-management.md)
 7. [Annotate ROI with nnInteractive](nninteractive-annotation.md)
@@ -30,7 +30,7 @@ Follow these steps to get started:
 - [Convert Files to SISF Format](file-conversion.md)
 
 ### Visualization & Interaction
-- [Image Display Window Operations](image-display-window-operations.md)
+- [Scene Display Window Operations](scene-display-window-operations.md)
 - [Basic Image Adjustments](basic-image-adjustments.md)
 - [Image Library Management](image-library-management.md)
 

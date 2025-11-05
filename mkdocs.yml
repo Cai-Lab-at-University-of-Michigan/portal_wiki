@@ -75,7 +75,7 @@ nav:
       - Upload Files: file-uploads.md
       - Convert to SISF: file-conversion.md
   - Visualization:
-      - Image Display Window: image-display-window-operations.md
+      - Scene Display Window: scene-display-window-operations.md
       - Basic Adjustments: basic-image-adjustments.md
       - Image Library: image-library-management.md
   - Annotation:

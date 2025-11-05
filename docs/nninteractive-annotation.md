@@ -18,7 +18,7 @@ Please contact the site administrator to set up your account before first use.
 ## Prepare ROI Image Data
 
 1. Open an image dataset and select an ROI  
-   (refer to the [Basic Operations Guide](image-display-window-operations.md)).
+   (refer to the [Basic Operations Guide](scene-display-window-operations.md)).
 2. In the ROI Selection dialog, click `Annotate`.  
    This will download the ROI image data to your nnInteractive workspace.
 

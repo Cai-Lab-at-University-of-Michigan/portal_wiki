@@ -18,4 +18,4 @@ tags:
    - Contrast
    - Channel color
 4. Experiment with these controls to optimize viewing for your dataset and annotation workflow.
-5. To save the current visualization settings, press `Ctrl+S` (Windows/Linux) or `Cmd+S` (macOS) in the image display window.
+5. To save the current visualization settings, press `Ctrl+S` (Windows/Linux) or `Cmd+S` (macOS) in the Scene Display Window.

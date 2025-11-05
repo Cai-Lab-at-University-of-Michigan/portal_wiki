@@ -3,7 +3,7 @@ tags:
    - viewer
 ---
 
-*This tutorial demonstrates basic operations in the image display window.*
+*This tutorial demonstrates basic operations for the Scene Viewer.*
 
 ---
 
