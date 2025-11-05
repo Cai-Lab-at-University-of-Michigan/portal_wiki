@@ -80,6 +80,4 @@ nav:
       - Image Library: image-library-management.md
   - Annotation:
       - nnInteractive: nninteractive-annotation.md
-  - Tutorials:
-      - nnInteractive Guide (PDF): tutorials/nninteractive-access-and-usage-guide.pdf
   - Tags: tags.md
