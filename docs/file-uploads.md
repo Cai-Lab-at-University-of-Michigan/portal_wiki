@@ -14,8 +14,7 @@ tags:
 1. Install **Globus Connect Personal** on your computer.  
 2. During setup, select the folder(s) you want to make available for transfer.
 
-Globus installation and configuration guide:  
-https://docs.globus.org/globus-connect-personal
+Check out [Globus installation and configuration guide](https://docs.globus.org/globus-connect-personal)
 
 ---
 
