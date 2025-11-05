@@ -2,7 +2,7 @@
 
 This repository hosts the documentation for the RE-JOIN Portal.
 
-### 📚 Live Docs
+### Live Docs
 https://Cai-Lab-at-University-of-Michigan.github.io/RE_JOIN_PORTAL_WIKI/
 
 

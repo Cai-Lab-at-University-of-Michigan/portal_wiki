@@ -15,7 +15,7 @@ Follow these steps to get started:
 4. [Image Viewer](image-display-window-operations.md)
 5. [Basic Image Adjustments](basic-image-adjustments.md)
 6. [Manage Image Library](image-library-management.md)
-7. [Annotate ROI with nnInteractive](nnInteractive-annotation.md)
+7. [Annotate ROI with nnInteractive](nninteractive-annotation.md)
 
 ---
 
@@ -35,7 +35,7 @@ Follow these steps to get started:
 - [Image Library Management](image-library-management.md)
 
 ### Annotation
-- [nnInteractive Annotation Workflow](nnInteractive-annotation.md)
+- [nnInteractive Annotation Workflow](nninteractive-annotation.md)
 
 ---
 

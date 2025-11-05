@@ -37,7 +37,7 @@ Please contact the site administrator to set up your account before first use.
 This process ensures the original ROI dataset remains intact.
 
 For instructions on how to use nnInteractive tools, see the  
-[nnInteractive documentation](./tutorials/nnInteractive-Access-and-Usage-Guide.pdf).
+[nnInteractive documentation](./tutorials/nninteractive-access-and-usage-guide.pdf).
 
 ---
 

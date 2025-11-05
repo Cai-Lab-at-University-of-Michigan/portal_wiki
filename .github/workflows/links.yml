@@ -1,6 +1,6 @@
 name: Check Links
 on:
-  schedule: [{ cron: "0 5 * * 1" }]   # weekly
+  schedule: [{ cron: "0 5 * * 1" }]
   workflow_dispatch:
 jobs:
   lychee:
