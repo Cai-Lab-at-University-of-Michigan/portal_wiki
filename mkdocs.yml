@@ -19,14 +19,14 @@ theme:
     - palette.toggle
   palette:
     - scheme: default
-      primary: silver
+      primary: indigo
       accent: indigo
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - scheme: slate
       primary: indigo
-      accent: cyan
+      accent: indigo
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
