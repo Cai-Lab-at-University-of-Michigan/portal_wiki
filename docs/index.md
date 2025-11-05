@@ -12,7 +12,7 @@ Follow these steps to get started:
 1. [Login & Account Setup](login.md)
 2. [Upload Files](file-uploads.md)
 3. [Convert to SISF Format](file-conversion.md)
-4. [Image Viewer](image-display-window-operations.md)
+4. [Scence Viewer](image-display-window-operations.md)
 5. [Basic Image Adjustments](basic-image-adjustments.md)
 6. [Manage Image Library](image-library-management.md)
 7. [Annotate ROI with nnInteractive](nninteractive-annotation.md)
