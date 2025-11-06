@@ -4,7 +4,7 @@ repo_url: https://github.com/Cai-Lab-at-University-of-Michigan/RE_JOIN_PORTAL_WI
 edit_uri: edit/main/docs/
 
 theme:
-  name: material
+  name: readthedocs
   language: en
   logo: assets/logo.svg 
   favicon: assets/favicon.png
