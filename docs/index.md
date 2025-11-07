@@ -1,6 +1,6 @@
 # RE-JOIN Portal User Guide
 
-Welcome to the RE-JOIN Imaging & Annotation Platform.  
+Welcome to Our RE-JOIN Portal!  
 This guide walks you through account setup, data upload, visualization, ROI extraction, and AI-assisted annotation workflows.
 
 ---
