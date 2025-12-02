@@ -9,7 +9,7 @@ tags:
 
 ## Basic Image Adjustments
 
-1. Open an image or scene and click `Shader Editor`.  
+1. Open an image or scene, the adjustments panel will be appearing on the right side of the webpage.  
    This panel controls visualization settings in the Neuroglancer viewer.
 2. Adjust the visualization layout as needed.  
    You may also enable **3D volume rendering** — use the gain slider to refine the rendering.

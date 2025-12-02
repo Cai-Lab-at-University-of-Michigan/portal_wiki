@@ -31,7 +31,7 @@ tags:
 
 Common causes and solutions:
 
-1. Adjust brightness: open `Shader Editor` and modify the brightness settings.
+1. Adjust brightness: modify the brightness settings.
 2. Conversion issue: image conversion may have failed  
    *(rare — contact the site administrator if you suspect this)*.
 3. Network/connection issue: close the viewer window and reopen the dataset.
