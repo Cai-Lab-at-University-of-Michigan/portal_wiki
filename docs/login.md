@@ -10,7 +10,7 @@ tags:
 ## Login & Account Setup
 
 Go to the login page:  
-https://rejon.cai-lab.org/login
+https://rejoin.cai-lab.org/login
 
 Three login options are supported:
 
