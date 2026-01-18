@@ -64,6 +64,16 @@ extra:
       link: https://github.com/Cai-Lab-at-University-of-Michigan
   generator: false
 
+validation:
+  nav:
+    omitted_files: ignore
+    not_found: warn
+    absolute_links: warn
+  links:
+    not_found: warn
+    absolute_links: warn
+    unrecognized_links: warn
+
 nav:
   - Home: index.md
   - Getting Started:
