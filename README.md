@@ -131,7 +131,6 @@ source .venv/bin/activate    # macOS / Linux
 pip install mkdocs-material \
             mkdocs-minify-plugin \
             mkdocs-redirects \
-            mkdocs-git-revision-date-localized-plugin \
             mkdocs-glightbox
 ```
 
