@@ -1,12 +1,12 @@
-site_name: RE-JOIN Portal Wiki
-site_url: https://Cai-Lab-at-University-of-Michigan.github.io/RE_JOIN_PORTAL_WIKI/
-repo_url: https://github.com/Cai-Lab-at-University-of-Michigan/RE_JOIN_PORTAL_WIKI
+site_name: ${PORTAL_NAME}
+site_url: ${SITE_URL}
+repo_url: ${REPO_URL}
 edit_uri: edit/main/docs/
 
 theme:
   name: readthedocs
   language: en
-  logo: assets/logo.svg 
+  logo: assets/logo.svg
   favicon: assets/favicon.png
   features:
     - navigation.tabs
@@ -57,8 +57,6 @@ plugins:
       fallback_to_build_date: true
   - minify:
       minify_html: true
-  # optional: auto-include snippets from other files
-  # - include-markdown
 
 extra:
   social:

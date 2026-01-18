@@ -9,8 +9,8 @@ tags:
 
 ## Login & Account Setup
 
-Go to the login page:  
-https://rejoin.cai-lab.org/login
+Go to the login page:
+{{PORTAL_URL}}/login
 
 Three login options are supported:
 

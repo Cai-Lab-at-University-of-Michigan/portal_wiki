@@ -1,0 +1,108 @@
+name: Deploy to All Portals
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up matrix from portals.yml
+        id: set-matrix
+        run: |
+          wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          chmod +x /usr/local/bin/yq
+          MATRIX=$(yq eval -o=json '.portals' portals.yml | jq -c '{include: .}')
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+  deploy:
+    needs: prepare-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.prepare-matrix.outputs.matrix) }}
+      fail-fast: false
+    name: Deploy to ${{ matrix.name }}
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install mkdocs-material mkdocs-minify-plugin mkdocs-redirects mkdocs-git-revision-date-localized-plugin mkdocs-glightbox
+
+      - name: Create portal repository if it doesn't exist
+        env:
+          GH_TOKEN: ${{ secrets.PORTAL_WIKI_DEPLOY_TOKEN }}
+        run: |
+          REPO="${{ matrix.repository }}"
+          if gh repo view "$REPO" >/dev/null 2>&1; then
+            echo "Repository $REPO already exists"
+            echo "REPO_CREATED=false" >> $GITHUB_ENV
+          else
+            echo "Creating repository $REPO"
+            gh repo create "$REPO" \
+              --public \
+              --description "Documentation for ${{ matrix.display_name }}" \
+              --homepage "${{ matrix.site_url }}"
+            echo "Repository $REPO created"
+            echo "REPO_CREATED=true" >> $GITHUB_ENV
+            sleep 5
+          fi
+
+      - name: Build portal site
+        env:
+          PORTAL_NAME: ${{ matrix.display_name }}
+          SITE_URL: ${{ matrix.site_url }}
+          REPO_URL: ${{ matrix.repo_url }}
+          PORTAL_URL: ${{ matrix.portal_url }}
+        run: |
+          cp -r source/docs ./docs-template
+          cp source/mkdocs.yml.template ./
+
+          find docs-template -type f -name "*.md" -exec sed -i "s|{{PORTAL_NAME}}|$PORTAL_NAME|g" {} +
+          find docs-template -type f -name "*.md" -exec sed -i "s|{{PORTAL_URL}}|$PORTAL_URL|g" {} +
+          find docs-template -type f -name "*.md" -exec sed -i "s|{{SITE_URL}}|$SITE_URL|g" {} +
+
+          mv docs-template docs
+
+          envsubst < mkdocs.yml.template > mkdocs.yml
+          echo "Building site for: $PORTAL_NAME"
+          mkdocs build --strict
+
+      - name: Deploy to ${{ matrix.repository }} gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PORTAL_WIKI_DEPLOY_TOKEN }}
+          external_repository: ${{ matrix.repository }}
+          publish_branch: gh-pages
+          publish_dir: ./site
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy from source repo: ${{ github.sha }}'
+
+      - name: Enable GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.PORTAL_WIKI_DEPLOY_TOKEN }}
+        run: |
+          REPO="${{ matrix.repository }}"
+          echo "Configuring GitHub Pages for $REPO"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/pages" \
+            -f source[branch]=gh-pages \
+            -f source[path]=/ \
+            2>/dev/null || echo "GitHub Pages may already be enabled or will be enabled automatically"
+          echo "GitHub Pages configuration complete"
+          echo "Site will be available at: ${{ matrix.site_url }}"

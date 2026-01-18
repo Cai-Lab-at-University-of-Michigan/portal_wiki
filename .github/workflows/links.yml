@@ -3,12 +3,27 @@ on:
   schedule: [{ cron: "0 5 * * 1" }]
   workflow_dispatch:
 jobs:
-  lychee:
+  check-links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: lycheeverse/lychee-action@v1
+
+      - name: Build exclusion list from portals.yml
+        id: build-exclusions
+        run: |
+          wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          chmod +x /usr/local/bin/yq
+
+          EXCLUSIONS=""
+          for url in $(yq eval '.portals[].portal_url' portals.yml | grep -v "^null$"); do
+            EXCLUSIONS="$EXCLUSIONS --exclude \"$url/login\""
+          done
+
+          echo "exclusions=$EXCLUSIONS" >> $GITHUB_OUTPUT
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1
         with:
-          args: --verbose --no-progress --accept 200,429 --exclude "https://rejon.cai-lab.org/login" "docs/**/*.md"
+          args: --verbose --no-progress --accept 200,429 ${{ steps.build-exclusions.outputs.exclusions }} "docs/**/*.md"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

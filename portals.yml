@@ -1,0 +1,14 @@
+portals:
+  - name: rejoin
+    display_name: "RE-JOIN Portal Wiki"
+    repository: Cai-Lab-at-University-of-Michigan/RE_JOIN_PORTAL_WIKI
+    site_url: "https://Cai-Lab-at-University-of-Michigan.github.io/RE_JOIN_PORTAL_WIKI/"
+    repo_url: "https://github.com/Cai-Lab-at-University-of-Michigan/RE_JOIN_PORTAL_WIKI"
+    portal_url: "https://rejon.cai-lab.org"
+
+  - name: microendoscope
+    display_name: "Microendoscope Portal Wiki"
+    repository: Cai-Lab-at-University-of-Michigan/MICROENDOSCOPE_PORTAL_WIKI
+    site_url: "https://Cai-Lab-at-University-of-Michigan.github.io/MICROENDOSCOPE_PORTAL_WIKI/"
+    repo_url: "https://github.com/Cai-Lab-at-University-of-Michigan/MICROENDOSCOPE_PORTAL_WIKI"
+    portal_url: "https://microendoscope.cai-lab.org"

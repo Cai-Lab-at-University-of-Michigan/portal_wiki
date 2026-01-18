@@ -1,6 +1,6 @@
-# RE-JOIN Portal User Guide
+# {{PORTAL_NAME}} User Guide
 
-Welcome to Our RE-JOIN Portal!  
+Welcome to {{PORTAL_NAME}}!
 This guide walks you through account setup, data upload, visualization, ROI extraction, and AI-assisted annotation workflows.
 
 ---

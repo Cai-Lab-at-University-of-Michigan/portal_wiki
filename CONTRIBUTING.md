@@ -11,6 +11,10 @@
 - Use **relative links** to other pages (e.g., `file-conversion.md`).
 - Put images in `docs/assets/` and link `./assets/<name>.png`.
 - Put pdfs in `docs/tutorials/` and link `./tutorials/<name>.pdf`.
+- Use template variables for portal-specific content:
+  - `{{PORTAL_NAME}}` for portal display name
+  - `{{PORTAL_URL}}` for portal application URL
+  - `{{SITE_URL}}` for documentation site URL
 - Keep sections: *Aim*, *Steps*, *Troubleshooting*, *Links/Next*.
 
 
