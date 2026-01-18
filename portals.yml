@@ -4,7 +4,7 @@ portals:
     repository: Cai-Lab-at-University-of-Michigan/RE_JOIN_PORTAL_WIKI
     site_url: "https://Cai-Lab-at-University-of-Michigan.github.io/RE_JOIN_PORTAL_WIKI/"
     repo_url: "https://github.com/Cai-Lab-at-University-of-Michigan/RE_JOIN_PORTAL_WIKI"
-    portal_url: "https://rejon.cai-lab.org"
+    portal_url: "https://rejoin.cai-lab.org"
 
   - name: microendoscope
     display_name: "Microendoscope Portal Wiki"
