@@ -16,6 +16,7 @@ Follow these steps to get started:
 5. [Basic Image Adjustments](basic-image-adjustments.md)
 6. [Manage Image Library](image-library-management.md)
 7. [Annotate ROI with nnInteractive](nninteractive-annotation.md)
+8. [Annotate ROI with Flood Filling](flood-filling-annotation.md)
 
 ---
 
