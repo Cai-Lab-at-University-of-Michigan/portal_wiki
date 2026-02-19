@@ -38,8 +38,26 @@ Ignore the "Authenticate" window and close it.
 
 This process ensures the original ROI dataset remains intact.
 
-For instructions on how to use nnInteractive tools, see the  
+For instructions on how to use nnInteractive tools, see the
 [nnInteractive documentation](./tutorials/nninteractive-access-and-usage-guide.pdf).
+
+---
+
+## Continue Previous Work
+
+It is definetly frustrated if the noVNC disconnects or napari just crashs. But we can continue previous work, with some loss :( though. First, the segmentation is saved automatically every **15 minutes**.
+
+To load previous progress:
+
+1. Open the image and initialize it
+2. Open the autosaved segmentation, select it, and click **Load Previous Instances** on the right
+3. Continue your work
+
+If you have an unfinished object (e.g., due to a crash):
+
+1. Change the class ID to that object's ID
+2. Click **Load Single Object** on the right
+3. Continue working on that object as you usually do
 
 ---
 
