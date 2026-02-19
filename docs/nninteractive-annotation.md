@@ -43,20 +43,21 @@ For instructions on how to use nnInteractive tools, see the
 
 ---
 
-## Continue Previous Work
-
-It is definetly frustrated if the noVNC disconnects or napari just crashs. But we can continue previous work, with some loss :( though. First, the segmentation is saved automatically every **15 minutes**.
-
-To load previous progress:
+## Continue Saved Segmentation 
 
 1. Open the image and initialize it
-2. Open the autosaved segmentation, select it, and click **Load Previous Instances** on the right
-3. Continue your work
+2. Open the autosaved segmentation, select it
+3. Click `Load Previous Instances` on the right
+4. Continue your work
 
-If you have an unfinished object (e.g., due to a crash):
+It is definetly frustrated if the noVNC disconnects or napari just crashs. But we now can continue previous work, with some loss :( though. The segmentation will be saved automatically every **15 minutes**.
 
-1. Change the class ID to that object's ID
-2. Click **Load Single Object** on the right
+---
+
+##  Load Previous Object
+
+1. Change the `class ID` to that object's ID on the right panel
+2. Click `Load Single Object`on the right panel
 3. Continue working on that object as you usually do
 
 ---
@@ -64,28 +65,28 @@ If you have an unfinished object (e.g., due to a crash):
 ## Troubleshooting
 
 - **I do not see the `nnInteractive` option in Quick Access**
-  - Your account may not be activated yet  
-  - Contact the site administrator
+    - Your account may not be activated yet
+    - Contact the site administrator
 
 - **I cannot log in**
-  - Ensure your nnInteractive account has been created  
-  - Try resetting your credentials if applicable
+    - Ensure your nnInteractive account has been created
+    - Try resetting your credentials if applicable
 
 - **My ROI file is not appearing in the `data` folder**
-  - Confirm the ROI selection was downloaded (click `Annotate` again)
-  - Check that the upload/conversion job has completed in the portal
-  - Restart nnInteractive and refresh the folder view
+    - Confirm the ROI selection was downloaded (click `Annotate` again)
+    - Check that the upload/conversion job has completed in the portal
+    - Restart nnInteractive and refresh the folder view
 
 - **I cannot delete or move files inside `data`**
-  - This is expected — the folder is protected  
-  - Copy files to a new workspace folder instead
+    - This is expected — the folder is protected
+    - Copy files to a new workspace folder instead
 
 - **Annotation changes are not saved**
-  - Ensure you are editing files in your own folder, not `data`
-  - Confirm local disk permissions are not restricted
+    - Ensure you are editing files in your own folder, not `data`
+    - Confirm local disk permissions are not restricted
 
 - **Viewer loads but image is blank**
-  - Try re-opening the file  
-  - If the problem persists, the ROI conversion may have failed — contact the administrator
+    - Try re-opening the file
+    - If the problem persists, the ROI conversion may have failed — contact the administrator
 
 ---
