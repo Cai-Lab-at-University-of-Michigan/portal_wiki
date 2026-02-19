@@ -14,6 +14,8 @@ tags:
 
 **Neuron Annotator** is a Napari plugin for interactive segmentation using flood filling and watershed algorithms.
 
+Ignore the "Authenticate" window and close it.
+
 1. Open Napari and load your image
 2. If nnInteractive plugin is opened, close it.
 3. Go to **Plugins → Neuron Annotator** 

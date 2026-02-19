@@ -13,6 +13,8 @@ tags:
 **nnInteractive** runs in a separate environment.  
 Please contact the site administrator to set up your account before first use.
 
+Ignore the "Authenticate" window and close it.
+
 ---
 
 ## Prepare ROI Image Data
