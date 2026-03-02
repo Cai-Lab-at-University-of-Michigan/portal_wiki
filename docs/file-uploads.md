@@ -22,7 +22,7 @@ Check out [Globus installation and configuration guide](https://docs.globus.org/
 
 1. Log in to the portal.
 2. Navigate to `Raw File Management`.
-3. Click `Upload Files via Globus`.
+3. Click `Upload Files via Globus`. If you want to upload to group shared folder, switch to group folder **first**.
 4. A new browser tab will open with the two-panel Globus File Manager:
    - **Left panel** — your Globus Personal collection (your computer)
    - **Right panel** — server collection (upload destination)

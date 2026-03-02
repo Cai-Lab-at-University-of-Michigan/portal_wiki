@@ -14,6 +14,8 @@ tags:
 - Single 3D image stack (single-channel or multi-channel)
 - `.tif` / `.tiff` files, assumed in **ZCYX** order  
   *(this is the typical layout exported by ImageJ)*
+- uncompressed `.nii` files
+
 
 Files will be converted into the large-scale compatible  
 [SISF format](https://github.com/Cai-Lab-at-University-of-Michigan/pySISF), optimized for efficient online visualization and annotation.
