@@ -84,6 +84,9 @@ nav:
       - Scene Display Window: scene-display-window-operations.md
       - Basic Adjustments: basic-image-adjustments.md
       - Image Library: image-library-management.md
+  - Registration and Stitching:
+      - Virtual Stitching: virtual-stitching.md
+      - Chromatic Aberration Correction: chromatic-aberration-correction.md
   - Annotation:
       - nnInteractive: nninteractive-annotation.md
       - Flood Filling: flood-filling-annotation.md
