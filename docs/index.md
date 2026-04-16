@@ -41,6 +41,8 @@ Follow these steps to get started:
 
 ### Annotation
 - [nnInteractive Annotation Workflow](nninteractive-annotation.md)
+- [Flood Fill Segmentation](flood-filling-annotation.md)
+- [3D Mean Shift Spot Detection](mean-shift-3d-detection.md)
 
 ---
 

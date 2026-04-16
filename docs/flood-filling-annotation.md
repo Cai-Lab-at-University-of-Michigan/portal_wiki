@@ -18,7 +18,7 @@ tags:
 
 ## Getting Started
 
-1. Open an image scene and select a **segmentation layer** in the right sidebar
+1. Open an image scene and select a **layer** in the right sidebar
 2. Open the **Interactive Annotation** panel
 3. Click **Lock View** to freeze the current viewport — this defines the region the algorithm operates on
 4. Select the **Algorithm** tool, then choose **Flood Fill**
