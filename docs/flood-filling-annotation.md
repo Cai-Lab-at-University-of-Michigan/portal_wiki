@@ -1,135 +1,153 @@
 ---
 tags:
-   - napari
    - annotation
    - flood-filling
-   - watershed
+   - segmentation
+   - algorithm
 ---
 
-*This tutorial guides the process for using the Neuron Annotator plugin for 3D/4D neuron segmentation in Napari.*
-
----
-
-## First-time Usage
-
-**Neuron Annotator** is a Napari plugin for interactive segmentation using flood filling and watershed algorithms.
-
-Ignore the "Authenticate" window and close it.
-
-1. Open Napari and load your image
-2. If nnInteractive plugin is opened, close it.
-3. Go to **Plugins → Neuron Annotator** 
+*This tutorial guides the process for using the Flood Fill algorithm for interactive 3D neuron segmentation.*
 
 ---
 
-## Prepare Image Data (Optional)
+## Overview
 
-### For 4D Multichannel Data
-
-1. The plugin displays **channel selection** checkboxes (Red, Green, Blue)
-2. Select which channels to mix for each color
-3. Click **"Synthesize RGB"**
-
-### Auto Contrast Enhancement
-
-- Enable **"Enhance (Auto Contrast)"** to improve visualization
-- Adjust percentile range (default: 1% - 99.9%) if needed
+**Flood Fill** is an interactive region-growing segmentation algorithm. Place seed points on the structure you want to segment, and the algorithm grows outward from each seed based on intensity similarity. Negative seeds can remove over-segmented regions.
 
 ---
 
-## Annotate
+## Getting Started
 
-### Step 1: Add Seeds
+1. Open an image scene and select a **layer** in the right sidebar
+2. Open the **Interactive Annotation** panel
+3. Click **Lock View** to freeze the current viewport — this defines the region the algorithm operates on
+4. Select the **Algorithm** tool, then choose **Flood Fill**
 
-1. Ensure `Add (+)` mode is selected
-2. Click on the structure you want to segment
-3. The algorithm automatically grows the region based on intensity similarity
+> Lock a tight region of interest for faster computation. To change the region, **Unlock**, navigate, then **Lock View** again.
 
-### Step 2: Adjust Tolerance
+---
 
-- Use the **"Seed Tolerance"** slider to control growth aggressiveness
-- Tolerance limits are automatically scaled based on the number of channels
-- For per-seed adjustment: modify the slider and click **"Apply to Selected"**
+## Place Positive Seeds
 
-### Step 3: Remove Overflow
+1. Ensure **+ Add** mode is selected (green button)
+2. Click on the viewer to place seeds on the structure to segment
+3. The algorithm runs automatically after each seed placement
 
-If segmentation grows too much:
+Seeds appear as numbered entries (+1, +2, +3) in the seed list, each with its own tolerance.
 
-1. Switch to `Remove (-)` mode
+---
+
+## Adjust Tolerance
+
+Tolerance controls how aggressively the region grows (0.0 = exact match, 1.0 = grows everywhere).
+
+- **New seeds**: Adjust the **New Seed Tolerance** slider *before* placing a seed (default: 0.10)
+- **Existing seeds**: Click a seed in the list, adjust **Selected Seed Tolerance**, then click **Re-run**
+
+> Start with low tolerance (0.05–0.15) and increase gradually to avoid leaking.
+
+---
+
+## Remove Over-segmentation
+
+Switch to negative seeds to remove unwanted regions:
+
+1. Click **- Remove** (red button) or press `P` to toggle polarity
 2. Click on the over-segmented area
-3. Use **Local Cut** (recommended) — erases a spherical region based on the "Radius" slider
+3. The algorithm re-runs, subtracting the unwanted region
 
-### Step 4: Manage Multiple Segments
+**Two removal modes** (configurable in the **Remove Logic** section):
 
-- Click **"New"** to create a new segment
-- Use **"Prev"** and **"Next"** to navigate between segments
-- Each segment gets a unique color
-
-**Segment Operations:**
-
-- **Undo/Redo** — Remove or restore the last seed point
-- **Reset** — Clear all seeds from current segment
-- **Delete** — Remove entire segment (unless it is the last segment)
-- **Merge** — Multi-select segments with **Ctrl+Click**, then click **"Merge"**
-- **Freeze** — Lock the current segmentation to prevent further changes
-- **Restart** — Reload the image and clear all segments
+| Mode | Use Case | Controls |
+|------|----------|----------|
+| **Local Cut** (default) | Remove a small localized area | **Seed Radius** slider controls erasure sphere size |
+| **Competitive** (watershed) | Remove an entire neighboring structure | **Boundary Shift** slider moves the boundary (positive = subtract more) |
 
 ---
 
-## Advanced Features
+## Multi-Channel Images
 
-### Edge Constraints
+For multi-channel images (e.g., RGB microscopy), the **Channel Selector** appears automatically:
 
-Prevents segmentation from growing across strong intensity gradients.
-
-1. Enable **"Edge Limit"** checkbox
-2. Adjust **"Edge Threshold"** slider (lower = stricter boundaries)
-3. Click **"Preview Edges"** to visualize detected edges
-
-> **Note**: This feature may not work perfectly in all cases.
+- All channels are selected by default
+- Uncheck noisy channels to improve segmentation
+- The algorithm uses color-space distance, so structures with similar brightness but different colors can be distinguished
 
 ---
 
-## Save Your Work
+## Advanced Options
 
-### Export Segmentation
+### Edge Limit
 
-1. Click **"Export"**
-2. Choose filename (e.g., `result.nii.gz`)
-3. Creates a NIfTI file with all segments labeled
+Prevents growth across strong intensity boundaries:
 
-### Fine-Tuning (Optional)
+1. Enable the **Edge Limit** toggle
+2. Adjust **Edge Threshold** (lower = stricter boundaries, default: 0.05)
 
-Use Napari's built-in **brush/eraser tools** on the labels layer for manual corrections.
+### Protect Others
 
-> **Note**: Save/Load Project has known bugs and is not recommended.
+On by default. Prevents overwriting voxels belonging to other segments.
+
+---
+
+## Managing Segments
+
+Annotate multiple structures in the same session:
+
+- **+ New**: Create a new segment
+- **Segment chips**: Click to switch between segments
+- `N` / `M`: Navigate next / previous segment
+- **Clear**: Delete selected segment(s) — use the list icon for multi-select mode
+
+Each segment maintains its own seeds and tolerance settings. Switching back to a previous segment restores them.
+
+---
+
+## Commit Results
+
+1. Click **Commit** to write the segmentation to the server
+2. The interim overlay is cleared and the result becomes permanent
+
+> Uncommitted changes are lost if you unlock the view.
+
+---
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `P` | Toggle seed polarity (+/-) |
+| `N` / `M` | Next / Previous segment |
+| `G` | Grab (select) hovered segment |
+| `X` | Clear current segment |
+| `L` | Lock / Unlock view |
+| `R` | Reset to locked view position |
+| `Ctrl+Z` / `Cmd+Z` | Undo |
+| `Ctrl+Shift+Z` / `Cmd+Shift+Z` | Redo |
+| `Esc` | Reset all modes |
 
 ---
 
 ## Troubleshooting
 
-- **Segmentation grows too aggressively**
-    - Lower the **Seed Tolerance** value
-    - Enable **Edge Limit** for boundary constraints
+- **Segmentation leaks into neighboring structures**
+    - Lower the **Seed Tolerance**
+    - Enable **Edge Limit**
+    - For multi-channel images, deselect noisy channels
 
 - **Segmentation does not grow enough**
-    - Increase the **Seed Tolerance** value
-    - Check that your seed point is placed on a representative pixel
+    - Increase the **Seed Tolerance**
+    - Place the seed on a representative part of the structure, not at the edge
 
-- **Local Cut removes too much or too little**
-    - Adjust the **Radius** slider before clicking
+- **Negative seeds not removing the right area**
+    - Switch between **Local Cut** and **Competitive** modes
+    - Adjust **Seed Radius** (Local Cut) or **Boundary Shift** (Competitive)
 
-- **4D data not displaying correctly**
-    - Use **"Synthesize RGB"** to create a visualization
-    - Verify channel selection checkboxes are configured
+- **Algorithm runs slowly**
+    - Lock a smaller region of interest
 
-- **Export fails**
-    - Ensure you have write permissions to the destination folder
-    - Check that at least one segment exists
-
-- **Plugin not appearing in menu**
-    - Confirm the plugin is installed
-    - Restart Napari
+- **Changes disappeared after unlocking**
+    - Always **Commit** before unlocking
 
 - **Other issues**
     - Contact the site administrator
