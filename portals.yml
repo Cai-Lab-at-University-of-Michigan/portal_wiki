@@ -11,4 +11,11 @@ portals:
     repository: Cai-Lab-at-University-of-Michigan/MICROENDOSCOPE_PORTAL_WIKI
     site_url: "https://Cai-Lab-at-University-of-Michigan.github.io/MICROENDOSCOPE_PORTAL_WIKI/"
     repo_url: "https://github.com/Cai-Lab-at-University-of-Michigan/MICROENDOSCOPE_PORTAL_WIKI"
-    portal_url: "https://microendoscope.cai-lab.org"
+    portal_url: "https://microendoscopy.cai-lab.org"
+
+  - name: savaii
+    display_name: "SAVAII Portal Wiki"
+    repository: Cai-Lab-at-University-of-Michigan/SAVAII_PORTAL_WIKI
+    site_url: "https://Cai-Lab-at-University-of-Michigan.github.io/SAVAII_PORTAL_WIKI/"
+    repo_url: "https://github.com/Cai-Lab-at-University-of-Michigan/SAVAII_PORTAL_WIKI"
+    portal_url: "https://sonic5.cai-lab.org"
