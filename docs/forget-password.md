@@ -11,7 +11,7 @@ tags:
 ## Forgot password?
 
 Go to the login page:  
-https://rejon.cai-lab.org/login
+{{PORTAL_URL}}/login
 
 Steps:
 

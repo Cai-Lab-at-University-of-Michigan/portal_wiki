@@ -3,11 +3,11 @@ tags:
    - image
 ---
 
-*This tutorial demonstrates generic image library management.*
+*This tutorial demonstrates the Library page.*
 
 ---
 
-## Image Library Management
+## Library
 
 - To open an image, click `Open Dataset`.  
   This will launch a new browser window with the viewer.
