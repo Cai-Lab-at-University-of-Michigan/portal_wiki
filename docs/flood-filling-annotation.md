@@ -26,25 +26,36 @@ It runs in the portal. Set up the panel first, as described in
 1. Select the segmentation layer and click `Lock View`.
 2. Select the `Algorithms` tool, then `Flood Fill`.
 3. Under `Seed Mode`, keep `+ Add` selected and click on the structure in the
-   viewer to place a seed. The badges show how many positive and negative seeds
-   are placed.
-4. Click `Run Flood Fill`.
-5. Adjust and re-run until the result is right, then click `Commit`.
+   viewer. **The region grows as soon as the seed is placed.** There is no
+   separate button to start it.
+4. Adjust the parameters below, then click `Re-run` to apply them.
+5. Repeat until the result is right, then click `Commit`.
+
+Each new seed runs on its own with the values currently set under
+`New Seed Tolerance` and `New Seed Radius`. Editing the parameters of a seed
+already placed stages the change, and `Re-run` applies it.
 
 ---
 
 ## Controlling the result
 
-**Tolerance** decides how far the region grows. A higher value takes in voxels
-that differ more from the seed. If the region spills into neighbouring
-structures, lower it; if it stops short, raise it.
+**`New Seed Tolerance`** sets how far the *next* seed will grow. A higher value
+takes in voxels that differ more from the seed.
+
+**`Selected Seed Tolerance`** changes the seed already selected. The change is
+staged until `Re-run`.
 
 **Negative seeds** carve areas back out. Switch `Seed Mode` to `- Remove` and
-click on the part that should not be included.
+click on the part that should not be included. `Remove Logic` decides how:
 
-**Edge limit** stops growth at strong intensity gradients. Enable it when the
+- `Competitive` lets the negative seed compete with the positive one for the
+  boundary between them, adjusted by `Boundary Shift`.
+- `Local Cut` erases a sphere around the seed, sized by `New Seed Radius` or
+  `Selected Seed Radius`.
+
+**`Edge Limit`** stops growth at strong intensity gradients. Enable it when the
 structure has a clear boundary that tolerance alone does not respect, and lower
-its threshold for stricter boundaries.
+`Edge Threshold` for stricter boundaries.
 
 `Clear` (`C`) removes every seed and lets you start again.
 
@@ -62,8 +73,12 @@ measures.
 
 ### Troubleshooting
 
-- **The region grows too far**: lower the tolerance, or enable the edge limit.
+- **The region grows too far**: lower `New Seed Tolerance` for the next seed, or
+  lower `Selected Seed Tolerance` and click `Re-run` for one already placed.
+  Enabling `Edge Limit` also helps.
 - **The region does not grow**: raise the tolerance, and check the seed sits on a
   representative voxel rather than on an edge.
+- **A parameter change did nothing**: parameters for a seed already placed are
+  staged. Click `Re-run`.
 - **The run is refused**: the locked region is over the limit. Lock a smaller one.
 - **The result vanished**: it was not committed. Click `Commit` before unlocking.

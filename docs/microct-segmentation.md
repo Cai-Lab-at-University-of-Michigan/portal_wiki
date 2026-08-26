@@ -7,7 +7,7 @@ tags:
 
 *This tutorial covers whole-volume segmentation of mouse joint microCT scans.*
 
-> Available only on sites configured with this model.
+> Available on the RE-JOIN portal only.
 
 ---
 

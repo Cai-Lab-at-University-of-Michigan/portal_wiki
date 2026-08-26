@@ -35,10 +35,17 @@ The panel combines four kinds of tool:
 
 Select an existing segmentation layer, or create one with `New Segmentation Layer`.
 
-The dialog lists the available voxel sizes and marks one `RECOMMENDED`.
-**Full resolution is the recommended choice**, because it is the resolution you
-can annotate at. Coarser layers are created faster and use less disk, and the
-detail they drop cannot be recovered later.
+The dialog lists four downsample factors (1x, 2x, 4x, 8x) with the physical voxel
+size and the maximum on-disk size each produces, and marks one `RECOMMENDED`.
+
+**Full resolution is the recommended choice.** Whoever opens this dialog is about
+to annotate, and detail is what they came for: a layer created at a quarter or an
+eighth of the image's resolution loses that detail before the first stroke, and it
+cannot be recovered afterwards. The cost of full resolution is disk and time,
+which is why the other options remain, and why the figure matters on a large
+image: a full-resolution segmentation layer beside a 400 GB image is itself
+400 GB. Some models also require it. `MouseJoint (microCT)` produces a
+full-resolution mask and refuses a downsampled layer outright.
 
 ---
 
@@ -65,13 +72,18 @@ Undo and redo apply to the current segment.
 
 ### Algorithms
 
-Select `Algorithms` and choose one:
+Select `Algorithms` and choose one. The two have different controls.
 
-- **Flood Fill** grows a region from seed points by intensity similarity.
-  See [Flood Filling](flood-filling-annotation.md).
-- **3D Mean Shift** detects spot-like structures in the locked region.
+**Flood Fill** grows a region from seed points by intensity similarity. Placing a
+seed runs it immediately, and `Re-run` applies any parameter change made
+afterwards. Its controls are named for what they act on, such as
+`New Seed Tolerance` and `Selected Seed Tolerance`. See
+[Flood Filling](flood-filling-annotation.md).
 
-Set the parameters, then click `Run`.
+**3D Mean Shift** detects spot-like structures in the locked region. Its
+parameters are listed under their internal names (`bandwidth`,
+`intensity_threshold`, `bg_sub_threshold`, `merge_distance`). Set them, then
+click `Run 3D Mean Shift`.
 
 ### AI Model
 
@@ -101,7 +113,8 @@ result is wrong.
 stay greyed out.
 
 For whole-volume microCT segmentation with no prompts, see
-[MicroCT Segmentation](microct-segmentation.md).
+[MicroCT Segmentation](microct-segmentation.md). That model is available on the
+RE-JOIN portal only.
 
 ---
 
