@@ -77,17 +77,20 @@ nav:
   - Getting Started:
       - Login: login.md
       - Forgot Password: forget-password.md
+      - Groups and Sharing: groups-and-sharing.md
   - Data:
       - Upload Files: file-uploads.md
       - Convert to SISF: file-conversion.md
+      - Background Jobs: jobs.md
   - Visualization:
       - Scene Display Window: scene-display-window-operations.md
       - Basic Adjustments: basic-image-adjustments.md
+      - Scenes: scenes.md
       - Image Library: image-library-management.md
   - Registration and Stitching:
       - Virtual Stitching: virtual-stitching.md
       - Chromatic Aberration Correction: chromatic-aberration-correction.md
   - Annotation:
-      - nnInteractive: nninteractive-annotation.md
+      - Interactive Annotation: interactive-annotation.md
       - Flood Filling: flood-filling-annotation.md
-  - Tags: tags.md
+      - MicroCT Segmentation: microct-segmentation.md

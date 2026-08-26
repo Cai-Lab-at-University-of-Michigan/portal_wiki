@@ -1,137 +1,69 @@
 ---
 tags:
-   - napari
    - annotation
    - flood-filling
-   - watershed
+   - segmentation
 ---
 
-*This tutorial guides the process for using the Neuron Annotator plugin for 3D/4D neuron segmentation in Napari.*
-
----
-
-## First-time Usage
-
-**Neuron Annotator** is a Napari plugin for interactive segmentation using flood filling and watershed algorithms.
-
-Ignore the "Authenticate" window and close it.
-
-1. Open Napari and load your image
-2. If nnInteractive plugin is opened, close it.
-3. Go to **Plugins → Neuron Annotator** 
+*This tutorial covers the Flood Fill algorithm in the Interactive Annotation panel.*
 
 ---
 
-## Prepare Image Data (Optional)
+## Overview
 
-### For 4D Multichannel Data
+Flood Fill grows a region outward from seed points, taking in neighbouring voxels
+whose intensity is close enough to the seed. It suits structures that are
+continuous and distinct from their surroundings, and it runs on the region you
+have locked.
 
-1. The plugin displays **channel selection** checkboxes (Red, Green, Blue)
-2. Select which channels to mix for each color
-3. Click **"Synthesize RGB"**
-
-### Auto Contrast Enhancement
-
-- Enable **"Enhance (Auto Contrast)"** to improve visualization
-- Adjust percentile range (default: 1% - 99.9%) if needed
+It runs in the portal. Set up the panel first, as described in
+[Interactive Annotation](interactive-annotation.md).
 
 ---
 
-## Annotate
+## Steps
 
-### Step 1: Add Seeds
-
-1. Ensure `Add (+)` mode is selected
-2. Click on the structure you want to segment
-3. The algorithm automatically grows the region based on intensity similarity
-
-### Step 2: Adjust Tolerance
-
-- Use the **"Seed Tolerance"** slider to control growth aggressiveness
-- Tolerance limits are automatically scaled based on the number of channels
-- For per-seed adjustment: modify the slider and click **"Apply to Selected"**
-
-### Step 3: Remove Overflow
-
-If segmentation grows too much:
-
-1. Switch to `Remove (-)` mode
-2. Click on the over-segmented area
-3. Use **Local Cut** (recommended) — erases a spherical region based on the "Radius" slider
-
-### Step 4: Manage Multiple Segments
-
-- Click **"New"** to create a new segment
-- Use **"Prev"** and **"Next"** to navigate between segments
-- Each segment gets a unique color
-
-**Segment Operations:**
-
-- **Undo/Redo** — Remove or restore the last seed point
-- **Reset** — Clear all seeds from current segment
-- **Delete** — Remove entire segment (unless it is the last segment)
-- **Merge** — Multi-select segments with **Ctrl+Click**, then click **"Merge"**
-- **Freeze** — Lock the current segmentation to prevent further changes
-- **Restart** — Reload the image and clear all segments
+1. Select the segmentation layer and click `Lock View`.
+2. Select the `Algorithms` tool, then `Flood Fill`.
+3. Under `Seed Mode`, keep `+ Add` selected and click on the structure in the
+   viewer to place a seed. The badges show how many positive and negative seeds
+   are placed.
+4. Click `Run Flood Fill`.
+5. Adjust and re-run until the result is right, then click `Commit`.
 
 ---
 
-## Advanced Features
+## Controlling the result
 
-### Edge Constraints
+**Tolerance** decides how far the region grows. A higher value takes in voxels
+that differ more from the seed. If the region spills into neighbouring
+structures, lower it; if it stops short, raise it.
 
-Prevents segmentation from growing across strong intensity gradients.
+**Negative seeds** carve areas back out. Switch `Seed Mode` to `- Remove` and
+click on the part that should not be included.
 
-1. Enable **"Edge Limit"** checkbox
-2. Adjust **"Edge Threshold"** slider (lower = stricter boundaries)
-3. Click **"Preview Edges"** to visualize detected edges
+**Edge limit** stops growth at strong intensity gradients. Enable it when the
+structure has a clear boundary that tolerance alone does not respect, and lower
+its threshold for stricter boundaries.
 
-> **Note**: This feature may not work perfectly in all cases.
-
----
-
-## Save Your Work
-
-### Export Segmentation
-
-1. Click **"Export"**
-2. Choose filename (e.g., `result.nii.gz`)
-3. Creates a NIfTI file with all segments labeled
-
-### Fine-Tuning (Optional)
-
-Use Napari's built-in **brush/eraser tools** on the labels layer for manual corrections.
-
-> **Note**: Save/Load Project has known bugs and is not recommended.
+`Clear` (`C`) removes every seed and lets you start again.
 
 ---
 
-## Troubleshooting
+## Limits
 
-- **Segmentation grows too aggressively**
-    - Lower the **Seed Tolerance** value
-    - Enable **Edge Limit** for boundary constraints
-
-- **Segmentation does not grow enough**
-    - Increase the **Seed Tolerance** value
-    - Check that your seed point is placed on a representative pixel
-
-- **Local Cut removes too much or too little**
-    - Adjust the **Radius** slider before clicking
-
-- **4D data not displaying correctly**
-    - Use **"Synthesize RGB"** to create a visualization
-    - Verify channel selection checkboxes are configured
-
-- **Export fails**
-    - Ensure you have write permissions to the destination folder
-    - Check that at least one segment exists
-
-- **Plugin not appearing in menu**
-    - Confirm the plugin is installed
-    - Restart Napari
-
-- **Other issues**
-    - Contact the site administrator
+Flood Fill runs on the CPU inside the locked region and is capped at about
+16.7 million voxels (256 x 256 x 256) with a 30 second budget. Lock a smaller
+region if it is refused. Unlike the AI model, it cannot read the region at a
+coarser resolution, because downsampling changes the intensity gradients it
+measures.
 
 ---
+
+### Troubleshooting
+
+- **The region grows too far**: lower the tolerance, or enable the edge limit.
+- **The region does not grow**: raise the tolerance, and check the seed sits on a
+  representative voxel rather than on an edge.
+- **The run is refused**: the locked region is over the limit. Lock a smaller one.
+- **The result vanished**: it was not committed. Click `Commit` before unlocking.
