@@ -64,7 +64,7 @@ The **Auto-select** toggle (green when active) automatically selects the tile at
 ### Visual Indicators
 
 - **Blue** tiles are selected
-- **Orange dot** indicates tiles with unsaved changes
+- **Orange dot** indicates tiles modified since they were last confirmed
 - **Light blue** shows tiles in the current drag selection
 
 ---
@@ -96,9 +96,15 @@ The delta indicator (Δ) shows the current offset change from the original posit
 
 ## Saving Changes
 
-- **Save All**: Commits all pending changes permanently
-- **Discard**: Reverts all changes to original positions
-- Closing the dialog without saving will also discard changes
+Tile positions are written to disk as you move them. There is no separate save
+step.
+
+Once a tile has been moved, the panel shows how many tiles are modified, with two
+buttons:
+
+- **Confirm** clears the modified marker. It does not write anything that was not
+  already written.
+- **Discard** reverts those tiles to their last confirmed positions.
 
 ---
 
@@ -108,7 +114,7 @@ The delta indicator (Δ) shows the current offset change from the original posit
 - Start with coarse adjustments using sliders, then fine-tune with input fields
 - Use the viewer to verify alignment at tile boundaries
 - For chromatic aberration correction, select only the channel that needs adjustment
-- Changes are previewed live but not permanent until you click **Save All**
+- Use **Discard** to back out of a set of adjustments, since the moves themselves are already saved
 
 ---
 

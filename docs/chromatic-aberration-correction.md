@@ -66,7 +66,7 @@ For consistent chromatic aberration across the dataset:
 1. Click **Select All** in the tile grid to select all tiles.
 2. Keep your single offset channel selected.
 3. Adjust the X/Y offset — this applies to all tiles simultaneously.
-4. Click **Save All** when satisfied.
+4. The offsets are saved as you set them; click **Confirm** to clear the modified marker.
 
 ### Step 6: Repeat for Other Channels
 
@@ -116,7 +116,7 @@ For a 3-channel dataset (488nm, 561nm, 647nm) with 647nm showing lateral shift:
 3. Deselect all channels, then select only **647nm** (the red channel chip)
 4. Adjust X offset: +5 pixels, Y offset: +3 pixels
 5. Verify alignment with 488nm reference channel
-6. Click **Select All** tiles, then **Save All**
+6. Click **Select all** tiles, then **Confirm**
 
 ---
 
@@ -124,7 +124,7 @@ For a 3-channel dataset (488nm, 561nm, 647nm) with 647nm showing lateral shift:
 
 - **Correction varies across field**: May indicate field-dependent aberration; consider correcting tiles individually
 - **Z-offset not helping**: Chromatic focal shift may require re-acquisition or deconvolution
-- **Changes not persisting**: Ensure you click **Save All** before closing
+- **Changes not persisting**: moves are written as you make them. If a tile went back to where it was, **Discard** was clicked, which reverts to the last confirmed positions
 - **Overcorrection**: Start with small adjustments; use input fields for precise values
 - **Channel colors not showing**: Channel color info comes from layer settings; ensure layer is properly configured
 

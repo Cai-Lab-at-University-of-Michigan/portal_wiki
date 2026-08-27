@@ -14,14 +14,20 @@ tags:
 - To change the image name or description, click `Edit Dataset`.
 - To delete an image, click `Delete Dataset`.  
   **Note:** This action is permanent and cannot be undone.
+- To let named colleagues reach it, click `Share Dataset`.
+- To attach an existing dataset to this one as a segmentation layer, click
+  `Link as Segmentation`.
 
 ---
 
 ## Share an Image
 
-- Click `Open Dataset`.
-- In the viewer window, click `Share` icon.
-- Copy the generated link and send it to collaborators.
+Click `Share Dataset` in the `Actions` menu. The dialog lists the people who can
+reach the dataset, and you add or remove them by account. There is no public
+link, and everyone you share with needs a portal account.
+
+The `Share` icon in the viewer is a different thing: it shares a saved view
+rather than the dataset. See [Groups and Sharing](groups-and-sharing.md).
 
 ---
 
