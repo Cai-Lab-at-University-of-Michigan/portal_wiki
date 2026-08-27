@@ -10,13 +10,10 @@ tags:
 
 ## What a scene is
 
-A dataset in `Library` is the image data. A **scene** is a saved view of one or
-more datasets: which layers are loaded, how they are positioned, and how they are
-displayed. Opening a dataset opens it in a scene, and annotation always happens
-in a scene, because a segmentation layer is a layer within it.
-
-Two people can hold different scenes over the same dataset without affecting each
-other.
+A dataset in `Library` is the image data. A scene is a saved view of one or more
+datasets: which layers are loaded, how they are positioned, and how they are
+displayed. Opening a dataset opens it in a scene, and annotation happens in a
+scene, because a segmentation layer is a layer within it.
 
 ---
 
@@ -26,29 +23,33 @@ Open `Scenes` in the sidebar. Each scene's `Actions` menu offers:
 
 - `Open Scene` opens it in the viewer.
 - `Edit Scene` changes the title and description.
-- `Duplicate Scene` copies it, including its layers and settings. Use this before
-  trying a different arrangement.
+- `Duplicate Scene` copies it, including its layers and settings.
 - `Move Scene To Folder` files it under a folder.
-- `Share Scene` creates a link.
+- `Share Scene` creates a link. See below.
 - `Download Scene` saves the scene state as a `.json` file. This is the view
   description, not the image data.
 - `Delete Scene` removes the scene. The datasets it referred to are not deleted.
 
-Folders are created and renamed on the same page. They organise scenes only.
+Folders are created and renamed on the same page, and hold scenes only.
 
 ---
 
 ## Sharing a scene
 
-`Share Scene` produces a link that opens the scene read-only. Anyone with the
-link can open it without an account, so treat it as public.
+`Share Scene` creates a link, which you can also reach from the `Share` icon in
+the viewer.
 
-To save the current state before sharing, press `Ctrl+S` / `Cmd+S` in the viewer.
+The recipient needs a portal account. Opening the link signs them in and adds the
+scene to their own `Scenes` list as a copy. Changes they make there do not reach
+your scene, and changes you make afterwards do not reach theirs.
+
+The link carries the scene as it was when the link was created. Save the scene
+first with `Ctrl+S` (Windows/Linux) or `Cmd+S` (macOS) in the viewer.
 
 ---
 
 ### Troubleshooting
 
-- **A shared link shows an older view**: the scene was not saved after the change.
-  Reopen it, press `Ctrl+S` / `Cmd+S`, and share again.
+- **A shared link shows an older view**: the link holds a snapshot. Save the
+  scene, then create a new link.
 - **A scene opens empty**: its dataset may have been deleted from `Library`.

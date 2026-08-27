@@ -41,7 +41,7 @@ annotation, and export.
 - [Chromatic Aberration Correction](chromatic-aberration-correction.md)
 
 ### Annotation
-- [Interactive Annotation](interactive-annotation.md) - brush, algorithms, and nnInteractive
+- [Interactive Annotation](interactive-annotation.md)
 - [Flood Filling](flood-filling-annotation.md)
 - [MicroCT Segmentation](microct-segmentation.md)
 
@@ -54,10 +54,10 @@ annotation, and export.
 - **Black image?** Adjust brightness, or check that conversion finished.
 - **Annotation tools greyed out?** The view is not locked. See
   [Interactive Annotation](interactive-annotation.md).
-- **`Virtual Desktop` in the sidebar does not open.** It is not in service.
-  Annotation runs in the browser.
-- **`Annotate` in the ROI dialog.** Use `Download` for a local copy of a region.
-  To annotate, open `Interactive Annotation` on the scene instead.
+- **Where do I annotate?** In the browser, on the scene. Open
+  `Interactive Annotation` from the sidebar. The sidebar's `Virtual Desktop` and
+  the ROI dialog's `Annotate` are not part of this workflow; `Download` in that
+  dialog gives you a local copy of a region.
 
 If problems persist, contact the site administrator.
 
@@ -71,6 +71,3 @@ This portal supports:
 - Cloud-enabled storage and streaming
 - Neuroglancer-based visualization
 - Interactive and AI-assisted annotation, including nnInteractive
-
-Some tools are available only on sites configured for them, including
-`Spot Detection`, `Online Transform`, and `MouseJoint (microCT)`.

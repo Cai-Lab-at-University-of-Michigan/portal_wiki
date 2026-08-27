@@ -7,7 +7,8 @@ tags:
 
 *This tutorial covers whole-volume segmentation of mouse joint microCT scans.*
 
-> Available on the RE-JOIN portal only.
+> This model is configured on the RE-JOIN portal. On other portals it does not
+> appear in the model list.
 
 ---
 
@@ -16,15 +17,16 @@ tags:
 `MouseJoint (microCT)` is an nnU-Net model for mouse femur-tibia joint
 segmentation. It takes no prompts and segments the whole volume, so there is no
 region to select and no view to lock. A run is queued as a background job and
-takes several minutes.
+takes minutes to tens of minutes.
 
 ---
 
 ## Before you start
 
-Three conditions have to be met, and each is refused with a message naming the cause.
+Each condition below is checked before the job is queued, and refused with a
+message naming the cause.
 
-**1. The scan was converted as CT data.**  
+**The scan was converted as CT data.**  
 The model reads absolute Hounsfield values, so the conversion must have recorded
 the intensity offset it applied. During conversion, answer
 **What kind of data is this?** with **This is a CT scan (Hounsfield units)**.
@@ -33,17 +35,16 @@ See [Convert Files to SISF Format](file-conversion.md).
 A scan converted without this is refused, and the model stays greyed out in the
 model list.
 
-**2. The segmentation layer is at full resolution.**  
+**The segmentation layer is at full resolution.**  
 The model produces a full-resolution mask, so the destination layer has to be on
 the image's own grid. In `New Segmentation Layer`, pick the option marked
-`(full resolution)`. On a large scan this is not always the pre-selected option.
+`(full resolution)`.
 
-**3. The segmentation layer belongs to this image.**  
+**The segmentation layer belongs to this image.**  
 Create it from the image you are segmenting. A layer created from a different
 image is drawn with that image's transform and would not line up.
 
-The model also declines images above 2,000,000,000 voxels, and images with an
-online transform applied.
+Very large images and images with an online transform applied are also refused.
 
 ---
 
@@ -77,4 +78,4 @@ it with the brush and eraser, and export it with `Export TIFF`. See
   layer at full resolution and run again.
 - **"That segmentation layer does not belong to this image"**: create the layer
   from this image.
-- **The job fails**: open `Jobs`, then `Actions` → `View Details` for the error.
+- **The job fails**: open `Jobs`, then `View Details` for the error.

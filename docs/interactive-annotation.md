@@ -11,16 +11,12 @@ tags:
 
 ## Overview
 
-Interactive Annotation runs inside the portal. Segmentation is written directly
-to a layer in the scene, so nothing has to be downloaded first and nothing has to
-be uploaded back.
+Interactive Annotation runs inside the portal, writing to a segmentation layer in
+the scene. There is nothing to download beforehand and nothing to upload back.
 
-The panel combines four kinds of tool:
-
-- manual **brush** and **eraser**
-- **Merge** and **Split** for editing existing segments
-- **Algorithms** that compute a region from seed points
-- **AI Model**, including `nnInteractive`
+The panel offers a brush and eraser, `Merge` and `Split` for editing segments,
+`Algorithms` for region growing and spot detection, and `AI Model` for
+`nnInteractive` and the prompt-free models.
 
 ---
 
@@ -37,15 +33,9 @@ Select an existing segmentation layer, or create one with `New Segmentation Laye
 
 The dialog lists four downsample factors (1x, 2x, 4x, 8x) with the physical voxel
 size and the maximum on-disk size each produces, and marks one `RECOMMENDED`.
-
-**Full resolution is the recommended choice.** Whoever opens this dialog is about
-to annotate, and detail is what they came for: a layer created at a quarter or an
-eighth of the image's resolution loses that detail before the first stroke, and it
-cannot be recovered afterwards. The cost of full resolution is disk and time,
-which is why the other options remain, and why the figure matters on a large
-image: a full-resolution segmentation layer beside a 400 GB image is itself
-400 GB. Some models also require it. `MouseJoint (microCT)` produces a
-full-resolution mask and refuses a downsampled layer outright.
+Full resolution is recommended: a coarser layer is faster to create and smaller
+on disk, but the detail it drops cannot be recovered afterwards. Some models
+require full resolution and refuse a downsampled layer.
 
 ---
 
@@ -58,8 +48,9 @@ write is bounded by it, and the tools stay disabled until it is set.
 - `Reset View` returns the viewer to the locked region if you have navigated away.
 - `Unlock` releases the region. Uncommitted work is confirmed before it is discarded.
 
-Large regions are handled by reading a coarser pyramid level rather than by
-refusing the region, so a whole scan can be locked for the AI model.
+The limit depends on what is selected. `nnInteractive` can read a large region at
+a coarser pyramid level, so a whole scan can be locked for it. The algorithms
+below read at full resolution and take a smaller region.
 
 ---
 
@@ -68,26 +59,24 @@ refusing the region, so a whole scan can be locked for the AI model.
 ### Brush and eraser
 
 Select `Brush` (`D`) and paint on the image. `Eraser` (`E`) removes voxels.
-Undo and redo apply to the current segment.
+`[` and `]` change the brush size.
 
 ### Algorithms
 
-Select `Algorithms` and choose one. The two have different controls.
+Select `Algorithms` and choose one. The two work differently.
 
 **Flood Fill** grows a region from seed points by intensity similarity. Placing a
 seed runs it immediately, and `Re-run` applies any parameter change made
-afterwards. Its controls are named for what they act on, such as
-`New Seed Tolerance` and `Selected Seed Tolerance`. See
-[Flood Filling](flood-filling-annotation.md).
+afterwards. See [Flood Filling](flood-filling-annotation.md).
 
-**3D Mean Shift** detects spot-like structures in the locked region. Its
-parameters are listed under their internal names (`bandwidth`,
-`intensity_threshold`, `bg_sub_threshold`, `merge_distance`). Set them, then
-click `Run 3D Mean Shift`.
+**3D Mean Shift** finds spot-like structures across the whole locked region and
+takes no seeds. Its output is a set of points rather than a filled mask. Set the
+parameters, then click `Run 3D Mean Shift`.
 
 ### AI Model
 
-Select `AI Model` and pick a model from the `Model` list.
+Select `AI Model` and pick a model from the `Model` list. Models that do not
+apply to the current image cannot be selected; hover one for the reason.
 
 **`nnInteractive`** segments from prompts you place on the image:
 
@@ -109,12 +98,8 @@ result is wrong.
 - `Next Object` keeps the mask and starts a new segment.
 - On a multi-channel image, `Channel` selects the channel the model sees.
 
-`SAM2`, `MedSAM2`, and `SAM3` appear in the list but are not implemented, and
-stay greyed out.
-
 For whole-volume microCT segmentation with no prompts, see
-[MicroCT Segmentation](microct-segmentation.md). That model is available on the
-RE-JOIN portal only.
+[MicroCT Segmentation](microct-segmentation.md).
 
 ---
 
@@ -140,16 +125,20 @@ downloads as a TIFF named after the dataset.
 |---|---|
 | `D` | Brush |
 | `E` | Eraser |
+| `[` `]` | Brush size |
+| `Ctrl+Z` / `Cmd+Z` | Undo |
+| `Ctrl+Shift+Z` / `Cmd+Shift+Z` | Redo |
+| `1` to `4` | Point, Scribble, Bounding Box, Lasso |
 | `P` | Switch prompt between positive and negative |
-| `1` - `4` | Point, Scribble, Bounding Box, Lasso |
 | `T` | Toggle AutoRun |
 | `S` | Run |
 | `C` | Clear prompts |
+| `N` / `M` | Next / previous segment |
 | `G` | Grab hovered segment |
 | `X` | Clear segment |
-| `L` | Lock / Unlock view |
+| `L` | Lock / unlock view |
 | `R` | Reset view |
-| `Esc` | Reset |
+| `Esc` | Clear prompts and uncommitted strokes, and deselect the active tool |
 | `Space` | Hold to pan |
 
 ---
@@ -158,9 +147,7 @@ downloads as a TIFF named after the dataset.
 
 - **The tools are greyed out**: the view is not locked. Click `Lock View`.
 - **`Lock View` is refused**: the region is larger than the selected tool allows.
-  Zoom in, or switch to the AI model, which reads large regions at a coarser level.
-- **The model is greyed out in the list**: it is either not implemented, or not
-  applicable to this image. Hover it for the reason.
+  Zoom in, or select `nnInteractive`, which reads a large region at a coarser level.
 - **The result disappeared after unlocking**: it was never committed. Click
   `Commit` before `Unlock`.
 - **Nothing changed after a run**: check that the intended segmentation layer is

@@ -63,11 +63,11 @@ structure has a clear boundary that tolerance alone does not respect, and lower
 
 ## Limits
 
-Flood Fill runs on the CPU inside the locked region and is capped at about
-16.7 million voxels (256 x 256 x 256) with a 30 second budget. Lock a smaller
-region if it is refused. Unlike the AI model, it cannot read the region at a
-coarser resolution, because downsampling changes the intensity gradients it
-measures.
+Flood Fill runs on the CPU inside the locked region, and the region has to be
+small enough for it: the panel shows the locked size against the limit. Lock a
+smaller region if a run is refused. Unlike `nnInteractive`, it cannot read the
+region at a coarser resolution, because downsampling changes the intensity
+gradients it measures.
 
 ---
 
@@ -81,4 +81,3 @@ measures.
 - **A parameter change did nothing**: parameters for a seed already placed are
   staged. Click `Re-run`.
 - **The run is refused**: the locked region is over the limit. Lock a smaller one.
-- **The result vanished**: it was not committed. Click `Commit` before unlocking.

@@ -4,7 +4,7 @@ tags:
    - sharing
 ---
 
-*This tutorial explains how data is shared between members of a group.*
+*This tutorial explains how data is shared with other people on the portal.*
 
 ---
 
@@ -25,15 +25,19 @@ appear, you have not been added to one.
 
 ---
 
-## Sharing a single dataset or scene
+## Sharing one dataset
 
-Sharing does not require a group:
+In `Library`, open a dataset's `Actions` menu and click `Share Dataset`. The
+dialog lists the people who can reach it, and you add or remove them by account.
+There is no public link: everyone you share with needs a portal account.
 
-- In the viewer, `Share` creates a link to the current scene. See
-  [Scenes](scenes.md).
-- In `Library`, `Open Dataset` then `Share` does the same for one dataset.
+---
 
-Links open read-only and do not require an account.
+## Sharing a scene
+
+`Share Scene` creates a link to a saved view rather than to the data. The
+recipient still needs an account, and receives their own copy of the scene. See
+[Scenes](scenes.md).
 
 ---
 
