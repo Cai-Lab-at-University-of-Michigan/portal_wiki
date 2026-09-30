@@ -29,7 +29,7 @@ Moves are written to the image as you make them, so they affect everyone who ope
 
 Tiles marked with a dot have been moved and not yet confirmed. Unselected ones are orange. `N tile(s) modified` counts each moved channel of a tile. The number fields show the shift since the panel loaded the tiles or you last clicked `Confirm`. A move from an earlier visit to the panel is already saved and cannot be discarded. Move it back by hand. How far a tile can move depends on the margin left when the image was converted. An axis with no room is grayed out.
 
-`Export` under `Tile Grid` saves the tile positions as an ImageJ `TileConfiguration.txt`.
+`Export` under `Tile Grid` downloads the tile positions of the first selected layer as a JSON file.
 
 ---
 
