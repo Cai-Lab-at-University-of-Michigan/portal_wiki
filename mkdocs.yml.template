@@ -77,20 +77,26 @@ nav:
   - Getting Started:
       - Login: login.md
       - Forgot Password: forget-password.md
+      - Navigation and Settings: navigation.md
       - Groups and Sharing: groups-and-sharing.md
   - Data:
-      - Upload Files: file-uploads.md
+      - Uploads: file-uploads.md
       - Convert to SISF: file-conversion.md
-      - Background Jobs: jobs.md
+      - Jobs: jobs.md
+      - Library: image-library-management.md
+      - Edit Metadata: edit-metadata.md
   - Visualization:
-      - Scene Display Window: scene-display-window-operations.md
-      - Basic Adjustments: basic-image-adjustments.md
+      - Scene Viewer: scene-display-window-operations.md
+      - Basic Image Adjustments: basic-image-adjustments.md
       - Scenes: scenes.md
-      - Image Library: image-library-management.md
   - Registration and Stitching:
       - Virtual Stitching: virtual-stitching.md
       - Chromatic Aberration Correction: chromatic-aberration-correction.md
+      - Online Transform: online-transform.md
+      - Motion Correction: motion-correction.md
   - Annotation:
       - Interactive Annotation: interactive-annotation.md
       - Flood Filling: flood-filling-annotation.md
+      - 3D Mean Shift: mean-shift-3d-detection.md
       - MicroCT Segmentation: microct-segmentation.md
+      - Spot Detection: spot-detection.md
