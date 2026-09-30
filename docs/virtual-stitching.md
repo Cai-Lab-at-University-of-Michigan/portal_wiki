@@ -3,126 +3,58 @@ tags:
    - imaging
    - stitching
    - alignment
-   - neuroglancer
 ---
 
-*This tutorial guides you through using Virtual Stitching to align multi-tile datasets.*
+*Move the tiles of a converted, tiled image by hand to correct how they sit next to each other.*
 
----
-
-## Overview
-
-Virtual Stitching allows you to interactively reposition individual tiles within a tiled dataset. This is useful for:
-- Correcting tile alignment after acquisition
-- Fine-tuning overlap regions between tiles
-- Adjusting chromatic aberration offsets between channels
+Moves are written to the image as you make them, so they affect everyone who opens it. Only the image's owner, or a site administrator, can move tiles.
 
 ---
 
-## Accessing Virtual Stitching
+## Steps
 
-1. Open a scene containing a tiled image layer in the 3D viewer.
-2. Navigate to **Quick Access** > **Virtual Stitching** in the sidebar.
-3. The Virtual Stitching panel will open.
+1. Open the image with `Open Dataset` in `Library`, or open a scene that holds it from `Scenes`. It opens in the viewer window.
+2. In the viewer window, open the `Layers` tab and click the tiled image layer to select it.
+3. In the main window, click `Virtual Stitching` in the sidebar, under `Plugins`. The panel opens with the layer that is selected in the viewer. To add another layer, `Ctrl`+click (`Cmd`+click on macOS) it in the viewer's `Layers` tab.
+4. `Auto-select` follows the viewer: it selects the tile under the viewer's position. Turn it off before you select several tiles.
+5. Select tiles under `Tile Grid`:
+    - Click a tile to select it. The viewer centers on that tile.
+    - Drag from one tile to another to select the rectangle between them.
+    - `Ctrl`+click (`Cmd`+click on macOS) toggles one tile, and `Shift`+click selects a range.
+    - Click a row or column header to select the whole row or column.
+    - `Select all` and `Deselect all` act on all tiles.
+6. On a multi-channel image, choose the channels to move under `Move channels:`. Only the chosen channels move.
+7. Under `Move tile`, use the `X`, `Y` and `Z` sliders, the arrow buttons (minus and plus for `Z`) or the number fields. `Step` sets how far a button click moves. Positive X moves the tile right, Y down and Z deeper. The viewer refreshes when you release the slider.
+8. Click `Confirm` to clear the modified marker. `Discard` returns the modified tiles to the positions the panel loaded, or to the last `Confirm`.
 
----
+Tiles marked with a dot have been moved and not yet confirmed. Unselected ones are orange. `N tile(s) modified` counts each moved channel of a tile. The number fields show the shift since the panel loaded the tiles or you last clicked `Confirm`. A move from an earlier visit to the panel is already saved and cannot be discarded. Move it back by hand. How far a tile can move depends on the margin left when the image was converted. An axis with no room is grayed out.
 
-## Multi-Layer Support
-
-You can work with multiple layers simultaneously:
-
-1. **Ctrl+Click** (or Cmd+Click on Mac) layers in the sidebar to select multiple
-2. **Shift+Click** to select a range of layers
-3. A badge shows the number of selected layers
-4. Tile grids from all selected layers are combined
-
-When multiple layers share the same tile positions, selecting a grid cell selects tiles from all layers at that position.
-
----
-
-## Using the Tile Grid
-
-### Selecting Tiles
-
-The tile grid displays all tiles arranged by their spatial positions:
-
-- **Click** on a tile to select it (centers viewer on that tile)
-- **Drag** across multiple tiles for freehand region selection
-- **Ctrl+Click** (or Cmd+Click on Mac) to toggle individual tiles
-- **Shift+Click** to select a rectangular range of tiles
-- Click **row/column headers** to select entire rows or columns
-- Use **Select All** / **Deselect All** buttons for bulk selection
-
-### Auto-Select Mode
-
-The **Auto-select** toggle (green when active) automatically selects the tile at your current viewer position:
-
-- When enabled, navigating in the viewer automatically highlights the corresponding tile
-- Useful for quickly finding and adjusting tiles as you browse the dataset
-- Disable when you want manual tile selection to persist while navigating
-
-### Visual Indicators
-
-- **Blue** tiles are selected
-- **Orange dot** indicates tiles modified since they were last confirmed
-- **Light blue** shows tiles in the current drag selection
+`Export` under `Tile Grid` saves the tile positions as an ImageJ `TileConfiguration.txt`.
 
 ---
 
-## Adjusting Tile Positions
+## Automatic alignment
 
-### Channel Selection
+The `Alignment` section has `Auto-align`, `Reset` and `Restore`. `Refine` also appears when the chosen `Engine` offers it. `Engine` and `Estimate from` choose the method and the reference channel, and `Manual link` fixes a single seam by hand. The buttons run as background jobs, which are listed under `Jobs`. They need exactly one layer selected, so hover over a grayed button for the reason.
 
-For multi-channel datasets, colored channel chips appear below the tile grid:
-
-1. Each chip shows the channel name and a color swatch matching the viewer display
-2. **Click** a channel chip to toggle selection (highlighted in blue when selected)
-3. **Shift+Click** to select a range of channels
-4. Use **Select All** / **Deselect All** for bulk channel selection
-
-Only selected channels will be adjusted when you move the sliders.
-
-### Position Controls
-
-Once tiles and channels are selected, use the position controls:
-
-- **X, Y, Z Sliders**: Drag to adjust offset in each dimension (real-time preview)
-- **Input Fields**: Type exact offset values for precise positioning
-- Changes are applied immediately to the viewer
-
-The delta indicator (Δ) shows the current offset change from the original position.
-
----
-
-## Saving Changes
-
-Tile positions are written to disk as you move them. There is no separate save
-step.
-
-Once a tile has been moved, the panel shows how many tiles are modified, with two
-buttons:
-
-- **Confirm** clears the modified marker. It does not write anything that was not
-  already written.
-- **Discard** reverts those tiles to their last confirmed positions.
-
----
-
-## Tips
-
-- Use **Auto-select** to quickly navigate to problem areas and select tiles
-- Start with coarse adjustments using sliders, then fine-tune with input fields
-- Use the viewer to verify alignment at tile boundaries
-- For chromatic aberration correction, select only the channel that needs adjustment
-- Use **Discard** to back out of a set of adjustments, since the moves themselves are already saved
+`Auto-align`, `Refine` and `Reset` set one position for all channels of each tile, so they replace a correction made on a single channel. `Reset` returns all tiles to their converted positions. `Restore` puts back the positions saved before the last run, and undoes only one run. Run the automatic steps before you correct a single channel. See [Chromatic Aberration Correction](chromatic-aberration-correction.md).
 
 ---
 
 ## Troubleshooting
 
-- **Tiles not loading**: Ensure the layer is an IMAGE type with SISF tile metadata
-- **Changes not visible**: Try refreshing the viewer or wait for cache invalidation to complete
-- **Multiple channels not moving together**: Ensure all desired channels are selected (highlighted in blue)
-- **Auto-select not working**: Check that Auto-select toggle is green (enabled)
-- **Layers not appearing**: Click layers in the sidebar to add them to the selection
-- If issues persist, contact the site administrator for assistance.
+- **`Select layers above to view tiles.`**: the panel has no layer. Click the image layer in the viewer's `Layers` tab, then open the panel again, or `Ctrl`+click (`Cmd`+click on macOS) the layer.
+- **`No SISF tiles found in this layer.`**: choose an image layer that was converted with `Convert to SISF` and that you can open. A single-tile image has a one-cell grid.
+- **A tile moved back**: `Discard` was clicked, or an automatic step ran afterwards.
+- **The viewer does not change**: wait a moment after you release the slider. If it still does not change, look for an error message, then reload the viewer window.
+- **The selection collapses to one tile**: turn `Auto-select` off.
+- **The panel says `Please open a scene to use Virtual Stitching`**: open a scene first, and keep the viewer window open.
+
+To change the tile overlap or the voxel size recorded at conversion, use `Edit Metadata` in `Library`. See [Edit Metadata](edit-metadata.md).
+
+---
+
+## Next
+
+- [Chromatic Aberration Correction](chromatic-aberration-correction.md)
+- [Scene Viewer](scene-display-window-operations.md)
