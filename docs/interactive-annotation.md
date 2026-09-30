@@ -20,7 +20,7 @@ tags:
 5. In the panel, choose a tool: `Brush`, `Eraser`, `Merge`, `Split`, `Algorithms` or `AI Model`. Hover over a grayed tool to read the reason. On an image layer only `Algorithms` can be used.
 6. Zoom and pan the viewer to the region you want, then click `Lock View`. The button stays grayed out until a tool is chosen, because the tool decides how large a region can be locked. The line under the button shows the size of the region against the limit for the tool. `Reset View` returns the viewer to the locked region, and `Unlock` releases it.
 7. Annotate with the tool, as described below.
-8. Click `Commit` to write the result into the segmentation layer.
+8. Click `Commit` to write the result into the segmentation layer. `Merge` and `Split` write at once and need no `Commit`.
 9. To export the layer, select the segmentation layer, choose `Algorithms` and click `Export TIFF`.
 
 For most tools the lock covers the region shown in the viewer, with Z centered on the current slice. With `AI Model` the lock can take the full depth and be read at a coarser resolution. The line under the button shows what will be locked.
@@ -47,7 +47,17 @@ The `Segmentation` section lists the segments as numbered chips.
 
 ## Merge and Split
 
-`Merge` combines segments, and `Split` separates a segment into its connected pieces. Both need a region: draw one with `B` in the viewer, as described in [Scene Viewer](scene-display-window-operations.md). Choose the segments by hovering over them and using `Add as Source` and `Set as Target`, or type an ID and press `Enter`. Then click `Merge <source> -> <target>` or `Split Segment <number>`. They change the layer at once, without `Commit`, and `Undo` and `Redo` do not reverse them. Only the last action can be reverted, with `Undo Last Merge` or `Undo Last Split`.
+`Merge` combines segments, and `Split` separates a segment into its connected pieces and removes pieces that are too small to keep. Both act on committed voxels only, so `Commit` first if you just painted the segments.
+
+Both work inside a region that you draw in the viewer window with `B`, not inside the locked region. Only voxels inside that box change, including its depth.
+
+1. Choose `Merge` or `Split`. For `Split`, the `Split Segment` button stays grayed out until you click `Lock View`.
+2. Draw the region. In the viewer window, press `B` at one corner on one slice, scroll to another slice, wait a moment, and press `B` at the opposite corner. See [Scene Viewer](scene-display-window-operations.md#select-and-download-a-region).
+3. Hover over a segment on a slice that shows it. The panel shows `Hovered:`, the segment number and its buttons, only while the pointer is over the segment.
+4. For `Merge`, click `Add as Source` for each segment to fold in, then hover over the segment to keep and click `Set as Target`. The sources are listed under `Source Segments (will be replaced):` and the target under `Target Segment (merge into):`. For `Split`, click `Set as Split Target`. To set the target, or the segment to split, by number instead of hovering, type it in the `Enter ID` box and press `Enter`. Sources can only be added with `Add as Source`.
+5. Click `Merge N → <target>` (`N` is the number of sources) or `Split Segment <number>`.
+
+`Merge` and `Split` change the layer at once, without `Commit`. `Undo` and `Redo` do not reverse them. Only the most recent merge and the most recent split can be reverted, with `Undo Last Merge` or `Undo Last Split`. After a split, `Last Split Result:` lists the new segments.
 
 ---
 
@@ -127,6 +137,8 @@ Arrow keys are ignored while the view is locked, unless the `Hand` tool is on.
 - **`Lock View` is grayed out**: choose a layer and a tool first. If both are set, the region is too large for the tool: zoom in, or lower the Z value next to the size line. A notice under the button says when zooming is the only fix. For `AI Model`, wait for the model list to load.
 - **The panel says `Lock the view first to enable tools`**: choose a tool first, then lock. The notice is out of date.
 - **A stroke does nothing**: lock the view first.
+- **`Something went wrong!` with `No bounding box provided and no ROI set`** on `Merge` or `Split`: draw a region with `B` first.
+- **`Something went wrong!` with `Internal Server Error`** on `Merge` or `Split`: the region is incomplete, has no depth, or is too large. Clear it with a right-click in the viewer window and draw a smaller one on two different slices, with a pause between the two presses of `B`.
 - **The panel shows a notice that begins `Please select a layer to begin`**: click a layer in the viewer window's `Layers` tab. After you open a different scene, pick the layer again.
 - **The new segmentation layer is not in the layer list**: open the scene again from `Scenes`.
 - **The result disappeared after unlocking**: it was never committed. Click `Commit` before `Unlock`.
