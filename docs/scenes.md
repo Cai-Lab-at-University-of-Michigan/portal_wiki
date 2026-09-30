@@ -4,52 +4,62 @@ tags:
    - viewer
 ---
 
-*This tutorial explains what a scene is and how to manage scenes.*
+*Keep, organize and share saved views of your datasets.*
 
 ---
 
 ## What a scene is
 
-A dataset in `Library` is the image data. A scene is a saved view of one or more
-datasets: which layers are loaded, how they are positioned, and how they are
-displayed. Opening a dataset opens it in a scene, and annotation happens in a
-scene, because a segmentation layer is a layer within it.
+A dataset in `Library` is the image data. A scene is a saved view of one or more datasets: which layers are loaded, how they are positioned, and how they are displayed. Annotation happens in a scene, because a segmentation layer is a layer within it.
+
+A dataset opened from `Library` uses a default scene, marked with a Default Scene badge in the viewer. Default scenes are not listed under `Scenes`. Any other scene carries a Composed Scene badge: a scene you saved, duplicated, added or composed, and the scene the viewer creates when you add a layer or a segmentation to a default scene.
 
 ---
 
-## Managing scenes
+## Steps
 
-Open `Scenes` in the sidebar. Each scene's `Actions` menu offers:
-
-- `Open Scene` opens it in the viewer.
-- `Edit Scene` changes the title and description.
-- `Duplicate Scene` copies it, including its layers and settings.
-- `Move Scene To Folder` files it under a folder.
-- `Share Scene` creates a link. See below.
-- `Download Scene` saves the scene state as a `.json` file. This is the view
-  description, not the image data.
-- `Delete Scene` removes the scene. The datasets it referred to are not deleted.
-
-Folders are created and renamed on the same page, and hold scenes only.
+1. Open a dataset from `Library`. See [Library](image-library-management.md).
+2. In the viewer window, press `Ctrl+S` (`Cmd+S` on macOS). Enter a `Scene Name` and click `Save`.
+3. Open `Scenes` in the sidebar. The scene is listed there. Double-click it to open it again.
 
 ---
 
-## Sharing a scene
+## Other ways to create a scene
 
-`Share Scene` creates a link, which you can also reach from the `Share` icon in
-the viewer.
-
-The recipient needs a portal account. Opening the link signs them in and adds the
-scene to their own `Scenes` list as a copy. Changes they make there do not reach
-your scene, and changes you make afterwards do not reach theirs.
-
-The link carries the scene as it was when the link was created. Save the scene
-first with `Ctrl+S` (Windows/Linux) or `Cmd+S` (macOS) in the viewer.
+- Click `Compose Scene` on the `Scenes` page to build a new scene from several datasets, or from the datasets of existing scenes. Display settings are not copied, so set them again in the new scene.
+- Choose `Duplicate Scene` on an existing scene.
+- Click `Add Scene`, enter a `Title`, choose a scene `.json` file, such as one saved with `Download Scene`, and click `Save`.
 
 ---
 
-### Troubleshooting
+## Manage scenes
 
-- **A shared link shows an older view**: the link holds a snapshot. Save the
-  scene, then create a new link.
-- **A scene opens empty**: its dataset may have been deleted from `Library`.
+Open `Scenes` in the sidebar. Double-click a scene to open it, or open its row menu in the `Actions` column:
+
+- `Open Scene` opens it in the viewer, after you click `Continue`, and replaces the scene you already have open.
+- `Download Scene` saves the scene state as a `.json` file. It describes the view, not the image data.
+- `Duplicate Scene` copies the scene as `<title> (Copy)`, with its layers and settings.
+- `Edit Scene` changes the title and description. It can also replace the view from a `.json` file.
+- `Move Scene` opens `Move Scene to Folder`. Choose a folder and click `Move`.
+- `Share Scene` creates a link. See [Groups and Sharing](groups-and-sharing.md).
+- `Delete Scene` removes the scene, after you confirm. The datasets it used are not deleted.
+
+`Create Folder` asks for a `Name` and a `Location`, top level or inside another folder, and adds the folder. `Delete Folder` asks you to confirm, and the dialog says how many scenes and folders it holds. Nothing is deleted with it: its scenes and folders move to the top level.
+
+To act on several scenes, click `Select`, tick the rows, and choose `Move Selected`, `Duplicate (N)` or `Delete`.
+
+---
+
+## Troubleshooting
+
+- **`Scenes` is empty after you opened a dataset**: default scenes are not listed. Press `Ctrl+S` (`Cmd+S` on macOS) in the viewer to keep one.
+- **A shared link shows an older view**: the link holds the scene as it was when the link was created. Save the scene, then create a new link.
+- **A scene opens without some layers**: a dataset in it may have been deleted from `Library`, or it is not shared with you. A scene whose datasets were all deleted shows `This scene has no layers yet.` in the layers panel of the viewer.
+- **A new segmentation layer is not in the layer list**: open the scene again from `Scenes`.
+
+---
+
+## Next
+
+- [Scene Viewer](scene-display-window-operations.md)
+- [Interactive Annotation](interactive-annotation.md)

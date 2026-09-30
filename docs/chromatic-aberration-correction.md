@@ -3,133 +3,37 @@ tags:
    - imaging
    - chromatic-aberration
    - alignment
-   - multi-channel
 ---
 
-*This tutorial guides you through correcting chromatic aberration in multi-channel datasets.*
+*Shift one channel of a tiled image against the others, using Virtual Stitching.*
 
----
-
-## Overview
-
-Chromatic aberration occurs when different wavelengths of light focus at slightly different positions, causing color fringing or channel misalignment in fluorescence microscopy images. The Virtual Stitching tool can be used to correct these offsets by adjusting each channel independently.
+Virtual Stitching can move one channel of each tile on its own, which shifts that channel against the others. The change is saved to the image, so it affects everyone who opens it, and only the image's owner, or a site administrator, can make it.
 
 ---
 
-## Understanding Chromatic Aberration
+## Steps
 
-In multi-channel fluorescence imaging:
-- Different emission wavelengths may have different focal planes
-- Optical elements can introduce lateral (X/Y) shifts between channels
-- These shifts are typically consistent across the entire field of view
+1. Open Virtual Stitching with an image that holds several channels in one layer selected. See [Virtual Stitching](virtual-stitching.md). An image converted with `Split into separate layers per channel` has no `Move channels:` row, so this procedure does not apply.
+2. Under `Tile Grid`, turn `Auto-select` off, then click `Select all`.
+3. Under `Move channels:`, click `Deselect all`, then click the chip of the channel to correct. Leave the reference channel unselected.
+4. Under `Move tile`, move the channel with the `X` and `Y` controls until its features line up with the reference channel in the viewer window. Positive X moves the channel right, and positive Y down.
+5. Click `Confirm`.
+6. Repeat for the next channel that needs a correction.
 
-Common symptoms:
-- Color halos around bright features
-- Misaligned structures when overlaying channels
-- Offset boundaries between channels at the same location
+There are two `Deselect all` buttons. The one under `Tile Grid` clears the tile selection, and the one under `Move channels:` clears the channel selection.
 
----
-
-## Correction Workflow
-
-### Step 1: Open Virtual Stitching
-
-1. Open a scene with your multi-channel dataset in the 3D viewer.
-2. Navigate to **Quick Access** > **Virtual Stitching**.
-3. Your current layer should be automatically selected. If not, click it in the sidebar.
-
-### Step 2: Select Reference Channel
-
-1. In the channel selection area, you'll see colored chips for each channel (colors match viewer display).
-2. Identify your reference channel (typically the channel with the sharpest features or the one you want others aligned to).
-3. **Deselect all channels** first, then keep the reference channel **unselected** — you will adjust other channels relative to it.
-
-### Step 3: Enable Auto-Select (Recommended)
-
-1. Enable the **Auto-select** toggle (green when active).
-2. Navigate in the viewer to find a region with clear features visible in multiple channels.
-3. The tile at your current position will be automatically selected.
-
-### Step 4: Adjust Offset Channels
-
-1. Select **one channel** that needs correction by clicking its chip (it highlights in blue).
-2. Use the **X and Y sliders** to shift the channel until it aligns with the reference.
-3. The viewer updates in real-time — look for:
-   - Edges that should overlap
-   - Point features that should coincide
-   - Structures that span multiple channels
-
-### Step 5: Apply to All Tiles
-
-For consistent chromatic aberration across the dataset:
-
-1. Click **Select All** in the tile grid to select all tiles.
-2. Keep your single offset channel selected.
-3. Adjust the X/Y offset — this applies to all tiles simultaneously.
-4. The offsets are saved as you set them; click **Confirm** to clear the modified marker.
-
-### Step 6: Repeat for Other Channels
-
-1. Deselect the corrected channel.
-2. Select the next channel that needs correction.
-3. Repeat the adjustment process.
-
----
-
-## Tips for Accurate Correction
-
-### Finding Good Reference Features
-
-- Use bright, high-contrast features
-- Structures labeled in multiple channels work best
-- Fiducial markers or beads are ideal if available
-- Cell boundaries or nuclei often appear in multiple channels
-
-### Using Auto-Select
-
-- Enable Auto-select to quickly navigate and find problem areas
-- The tool automatically selects the tile at your viewer position
-- Disable when you want to manually select specific tiles for comparison
-
-### Typical Offset Ranges
-
-- Lateral shifts (X/Y): Usually 0–20 pixels depending on objective and wavelength
-- Axial shifts (Z): Can be larger, especially with high-NA objectives
-- Far-red channels typically shift more than blue/green
-
-### Multi-Tile Datasets
-
-For tiled datasets with chromatic aberration:
-1. The aberration is usually **consistent** across all tiles
-2. Use Auto-select to verify alignment at a few representative tiles first
-3. Select **all tiles** and **one channel** to apply the same offset globally
-4. Verify at tile boundaries after applying
-
----
-
-## Example Correction
-
-For a 3-channel dataset (488nm, 561nm, 647nm) with 647nm showing lateral shift:
-
-1. Open Virtual Stitching
-2. Enable **Auto-select** and navigate to a tile with clear features
-3. Deselect all channels, then select only **647nm** (the red channel chip)
-4. Adjust X offset: +5 pixels, Y offset: +3 pixels
-5. Verify alignment with 488nm reference channel
-6. Click **Select all** tiles, then **Confirm**
+How far a channel can move depends on the margin left when the image was converted. The panel grays out an axis that has no room.
 
 ---
 
 ## Troubleshooting
 
-- **Correction varies across field**: May indicate field-dependent aberration; consider correcting tiles individually
-- **Z-offset not helping**: Chromatic focal shift may require re-acquisition or deconvolution
-- **Changes not persisting**: moves are written as you make them. If a tile went back to where it was, **Discard** was clicked, which reverts to the last confirmed positions
-- **Overcorrection**: Start with small adjustments; use input fields for precise values
-- **Channel colors not showing**: Channel color info comes from layer settings; ensure layer is properly configured
+- **The correction disappeared**: `Auto-align`, `Refine`, `Reset` or `Restore` ran afterwards. Repeat the correction. `Discard` also reverts unconfirmed moves made in the current visit to the panel.
+- **The move does not stay**: only the owner of the image, or a site administrator, can move tiles.
+- **A channel chip has no color**: the chip still works. The color comes from the channel settings in the viewer.
 
 ---
 
-## Related
+## Next
 
-- [Virtual Stitching](virtual-stitching.md) — Full guide to the Virtual Stitching tool
+- [Virtual Stitching](virtual-stitching.md)

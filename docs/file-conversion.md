@@ -2,78 +2,82 @@
 tags: 
    - upload
    - conversion
-   - globus
 ---
 
-*This tutorial guides you through the file conversion process.*
+*Convert an upload into the portal's image format (SISF) so that it can be viewed and annotated.*
 
 ---
 
-## Supported File Formats
+## Supported sources
 
-- Single 3D image stack (single-channel or multi-channel)
-- `.tif` / `.tiff` files, assumed in **ZCYX** order  
-  *(this is the typical layout exported by ImageJ)*
-- `.nii` and `.nii.gz` (NIfTI). A compressed `.nii.gz` is limited to **4 GiB**;
-  above that, decompress it and upload the `.nii`.
-- Squid acquisition folders, read together with their `acquisition.yaml`
+- **TIFF** (`.tif`, `.tiff`): one file, or a folder of numbered slices with one file per slice. The axis order is read from the file, so save a stack with its axes stored (for example an ImageJ hyperstack or an OME-TIFF). Check `Depth (Z)` and `Number of Channels` in the form. Only the first time point is converted. A folder of signed or floating-point slices cannot be converted as CT data.
+- **NIfTI** (`.nii`, `.nii.gz`). A fourth axis is read as channels.
+- **Squid acquisition folders.** Upload the whole folder.
 
-Files will be converted into the large-scale compatible  
-[SISF format](https://github.com/Cai-Lab-at-University-of-Michigan/pySISF), optimized for efficient online visualization and annotation.
+The result is stored in [SISF](https://github.com/Cai-Lab-at-University-of-Michigan/pySISF), the portal's image format.
 
 ---
 
 ## Steps
 
-1. Go to `Uploads`.
-2. Click `Actions` next to the uploaded file.
-3. Select `Convert to SISF`.
-4. Confirm that the Globus upload has **fully completed** in the Globus window.  
-   If confirmed, click `Yes, Continue`.
-5. Click `Extract Metadata`. Voxel size, image size, channel count, and (for Squid
-   acquisitions) the tile grid and overlap are read from the file and filled in.
-   Every field stays editable, so correct anything the file states wrongly. If
-   extraction fails, enter the values manually.
-6. Click `Start Conversion`.
-7. Once conversion completes, the field **SISF Conversion?** will show **Yes**.
-8. *(Optional)* Click `Add to SISF Library` to make the dataset available under `Library`.
+1. In `Uploads`, open the row menu of the file and choose `Convert to SISF`.
+2. `Confirm Globus Upload` asks whether the transfer has finished. Click `Yes, Continue`.
+3. `SISF Conversion Parameters` opens and reads the file's metadata. Check `Spatial Resolution (µm/pixel)`, `Tile Size (pixels)`, `Tile Grid (Nx, Ny, Nz)`, `Tile Overlap (%)` and `Number of Channels`. For a tiled source, also set `Scan Direction` and `Z Order`, which are not read from the file. Every field stays editable.
+4. Click `Start Conversion`.
+5. Follow the conversion. `Status` in `Uploads` shows `Processing...` with a percentage, and the job is listed under `Jobs`. When it ends, `Status` shows `Added` and the dataset is in `Library`. There is no separate step to add it.
+
+`Metadata successfully extracted!` means the file was read, not that every value was found. A value the file does not state stays empty or 0 and has to be typed in. If reading failed, click `Extract Metadata` or fill the fields in by hand.
+
+Check the voxel size before you start. If the file states no slice spacing, `Z Res` is copied from `X Res` and the form says so. That is a guess, so replace it with your real slice spacing.
+
+Other options in the dialog:
+
+- `Split into separate layers per channel` (multi-channel files) creates one dataset for each channel.
+- Under `Register as`, `Item type` chooses `Image` or `Segmentation`. Choose `Segmentation` only to bring in an existing mask. Pick its `Parent image`: the mask must be single-channel and match the parent's size, which is checked after the conversion.
+- For Squid acquisitions the dialog can also fit a flatfield correction. That is available only on sites configured for it.
 
 ---
 
-## CT data
+## Data that is not `uint8` or `uint16`
 
-Our storage format holds non-negative whole numbers, so a signed or floating-point
-source has to be shifted and rounded before it fits. When the file is neither
-`uint8` nor `uint16`, conversion asks **What kind of data is this?**
+A CT scan usually holds signed values (Hounsfield units). The form then shows a `Data Type Warning`, and `Start Conversion` asks `What kind of data is this?`. The storage format holds non-negative whole numbers, so the values are shifted and rounded first.
 
-Click **This is a CT scan (Hounsfield units)**. Rounding is exact for Hounsfield
-units, and the conversion records the offset it applied.
+| Button | Result |
+|---|---|
+| `This is a CT scan (Hounsfield units)` | Values are shifted and rounded, and the shift is recorded. This is required for [MicroCT Segmentation](microct-segmentation.md). |
+| `Not a CT scan, rescale to fit` | NIfTI only. Values are rescaled to fit the storage range, so absolute values are lost, and MicroCT Segmentation cannot use the result. |
+| `Cancel` | Returns to the form. |
 
-**This step is required for microCT segmentation.** The model reads absolute
-Hounsfield values, so a scan converted without a recorded offset cannot be used
-and the model is greyed out in the picker. See
-[MicroCT Segmentation](microct-segmentation.md).
+A TIFF with fractional or negative values that is not a CT scan is refused. Cancel, and convert the file to `uint16` yourself with the scaling that suits your data.
 
-For data whose detail sits below a single whole step, such as intensities
-normalised to 0-1, cancel and convert the file to `uint16` yourself, choosing the
-scaling that suits the data.
+A scan whose values arrive as `uint8` or `uint16` is converted without this question, so no shift is recorded and MicroCT Segmentation cannot use it.
 
 ---
 
-## Progress Monitoring
+## Convert again
 
-- Navigate to `Jobs` to track conversion progress.
-- You may cancel the job if needed.
+Choose `Already Converted (Redo?)` in the row menu, then `Yes, Redo`, and repeat the steps above.
+
+- To correct the voxel size, the tile overlap or the channel names of a converted image, use `Edit Metadata` in `Library` instead. See [Edit Metadata](edit-metadata.md).
+- A redo is refused when it would change the image's geometry (channel count, tile size or overlap, voxel size or image size), or when the dataset has revisions, the versions made with `Edit Metadata`. Delete those revisions in `Library` first. The refusal is reported as a failed job, not at the click. Read the reason under `Jobs`, `View Details`, `Result`.
+- To change the tile size, tile grid or channel count of a converted image, rename the upload in `Uploads` and convert it again under the new name. Do not delete the image and convert under the same name.
 
 ---
 
-### Troubleshooting
+## Troubleshooting
 
-- If the job status shows `Failure`:
-  - Confirm that all metadata matches the actual file.
-  - View metadata under `Actions` → `View Details` on the `Jobs` page.
-  - Common issues include:
-    - Image size mismatch
-    - Channel number mismatch
+- **`Start Conversion` is grayed out**: a required field is empty or invalid, for example a voxel size the file does not state. Fill it in. If every field is filled in, retype one value.
+- **`Status` stays at `Processing...`**: reload the page, then check `Jobs`.
+- **The job shows `FAILURE`**: open `Jobs`, choose `View Details` and read `Result`. Frequent reasons:
+    - `value_offset=... leaves values outside uint16 range`: a CT scan holds values outside the range the format can store after the shift. Clip or fix those values in the source.
+    - `Compressed NIfTI is too large to read efficiently`: decompress the file, and upload the `.nii`.
+    - `already exists with a different geometry` or `has edited versions`: see Convert again.
+- **`Status` shows `Converted` instead of `Added`**: the dataset was converted but not registered. Open `Jobs`, `View Details`, and read `Result`: it ends with `auto-register skipped` and the reason. For a segmentation the reason is usually a size or channel mismatch with the parent. Then choose `Add to SISF Library` in the row menu for an image, or `Add as Segmentation` for a mask.
+- **The voxel size is wrong after conversion**: use `Edit Metadata` in `Library`.
 
-If issues persist, contact the site administrator for assistance.
+---
+
+## Next
+
+- [Library](image-library-management.md)
+- [Jobs](jobs.md)
