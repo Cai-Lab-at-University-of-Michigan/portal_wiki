@@ -66,7 +66,7 @@ Choose `Already Converted (Redo?)` in the row menu, then `Yes, Redo`, and repeat
 
 ## Troubleshooting
 
-- **`Start Conversion` is grayed out**: a required field is empty or invalid, for example a voxel size the file does not state. Fill it in. If every field is filled in (this happens with NIfTI files), click into any field and out again, or retype one value.
+- **`Start Conversion` is grayed out**: a required field is empty or invalid, for example a voxel size the file does not state. Fill it in. If every field is filled in, retype one value.
 - **`Status` stays at `Processing...`**: reload the page, then check `Jobs`.
 - **The job shows `FAILURE`**: open `Jobs`, choose `View Details` and read `Result`. Frequent reasons:
     - `value_offset=... leaves values outside uint16 range`: a CT scan holds values outside the range the format can store after the shift. Clip or fix those values in the source.

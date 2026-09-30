@@ -42,9 +42,9 @@ Open `Scenes` in the sidebar. Double-click a scene to open it, or open its row m
 - `Edit Scene` changes the title and description. It can also replace the view from a `.json` file.
 - `Move Scene` opens `Move Scene to Folder`. Choose a folder and click `Move`.
 - `Share Scene` creates a link. See [Groups and Sharing](groups-and-sharing.md).
-- `Delete Scene` removes the scene. The datasets it used are not deleted.
+- `Delete Scene` removes the scene, after you confirm. The datasets it used are not deleted.
 
-`Create Folder` adds a folder. `Delete Folder` keeps the scenes in it and moves them to the top level.
+`Create Folder` asks for a `Name` and a `Location`, top level or inside another folder, and adds the folder. `Delete Folder` asks you to confirm, and the dialog says how many scenes and folders it holds. Nothing is deleted with it: its scenes and folders move to the top level.
 
 To act on several scenes, click `Select`, tick the rows, and choose `Move Selected`, `Duplicate (N)` or `Delete`.
 
@@ -54,7 +54,7 @@ To act on several scenes, click `Select`, tick the rows, and choose `Move Select
 
 - **`Scenes` is empty after you opened a dataset**: default scenes are not listed. Press `Ctrl+S` (`Cmd+S` on macOS) in the viewer to keep one.
 - **A shared link shows an older view**: the link holds the scene as it was when the link was created. Save the scene, then create a new link.
-- **A scene opens without some layers**: a dataset in it may have been deleted from `Library`, or it is not shared with you.
+- **A scene opens without some layers**: a dataset in it may have been deleted from `Library`, or it is not shared with you. A scene whose datasets were all deleted shows `This scene has no layers yet.` in the layers panel of the viewer.
 - **A new segmentation layer is not in the layer list**: open the scene again from `Scenes`.
 
 ---
