@@ -47,7 +47,7 @@ Only formats the portal can use are listed. A file in another format does not ap
 1. Open the row menu and choose `Delete File` or `Delete Folder`.
 2. Confirm with `Remove`.
 
-To delete several items, click `Select`, tick the rows, and click `Delete`, then click `Delete` in the dialog. A ticked folder takes everything inside it.
+To delete several items, click `Select`, tick the rows, and click `Delete`, then click `Delete` in the dialog, which says that the uploaded files are deleted from disk. A ticked folder takes everything inside it.
 
 Deleting an upload removes only the raw file. A dataset already in `Library` keeps its converted copy.
 
@@ -57,7 +57,7 @@ The row menu depends on the row. It offers `Convert to SISF`, `Already Converted
 
 ## Troubleshooting
 
-- **`You don't have any files yet` after a transfer**: click `Scan & Refresh`. Also check that Globus reports the transfer as complete, and that you are looking at `My Files` or the group you uploaded to.
+- **`You don't have any files yet` (`No shared files yet` in a group list) after a transfer**: click `Scan & Refresh`. Also check that Globus reports the transfer as complete, and that you are looking at `My Files` or the group you uploaded to.
 - **`No endpoint assigned. Please contact administrator.`**: your account has no upload collection yet. Ask the site administrator to assign one.
 - **Your computer's collection does not appear in Globus**: make sure Globus Connect Personal is running and that the folder is shared in its settings.
 - **The portal's collection is not the destination**: close the Globus tab and click `Upload Files via Globus` again. If it still fails, ask the site administrator.

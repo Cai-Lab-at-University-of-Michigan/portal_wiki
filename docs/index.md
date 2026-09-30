@@ -54,7 +54,6 @@ This guide takes you from a new account to an exported segmentation: account set
 
 - **Upload not visible?** Click `Scan & Refresh` in `Uploads`. See [Uploads](file-uploads.md).
 - **`Inactive user` when you log in?** Your account is waiting to be activated by the site administrator. `Continue with Google` shows a message that the account is not active yet. The fix is the same.
-- **The viewer does not open?** Check that your browser is not blocking pop-ups for this site.
 - **Black image?** See [Basic Image Adjustments](basic-image-adjustments.md).
 - **A tool or `Lock View` grayed out?** Hover over a grayed tool for the reason. `Lock View` becomes available once a tool is chosen. See [Interactive Annotation](interactive-annotation.md).
 - **Where do I annotate?** Open the dataset, then click `Interactive Annotation` in the sidebar. The `ROI Specifications` dialog in the viewer has a `Download` button for a local copy of a region, and an `Annotate` button that is not part of this workflow.

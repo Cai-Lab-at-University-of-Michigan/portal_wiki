@@ -10,11 +10,13 @@ tags:
 
 ## Group space
 
-A group space is a shared upload area with shared datasets. A site administrator creates it and decides who belongs to it. You cannot join one yourself, and the `Organization/Group` text in `Settings` is only a label. Group spaces exist only on sites where an administrator has set one up.
+A group space is a shared upload area with shared datasets. A site administrator creates it (`Admin`, `Group Workspaces`, `Add Workspace`) and adds its members under `Sharing Groups`, in the group that has the same name. You cannot join one yourself, and the `Organization/Group` text in `Settings` is only a label. Group spaces exist only on sites where a site administrator has set one up.
 
-- In `Uploads`, a member sees two buttons at the top: `My Files` and a button named after the group. Files in `My Files` are private to you. Choose the group button before you click `Upload Files via Globus` to upload to the group's shared folder.
-- In `Library`, datasets converted in the group space appear with your own, marked with a `Group` badge. Members can open them. Changing, sharing or deleting them is for a site administrator.
-- If you see only the heading `My Files`, your account has no group space.
+- In `Uploads`, a member sees two buttons at the top: `My Files` and a button named after the group. Files in `My Files` are private to you. Choose the group button before you click `Upload Files via Globus` to upload to the group's shared folder. Every member can scan and convert files in that folder. A file converted there belongs to the group.
+- In `Library`, datasets that belong to the group appear with your own, marked with a `Group` badge. A member can open a group dataset and make a segmentation on it. That segmentation belongs to the member alone.
+- For a member, the row menu of a group dataset offers `View Details` and `Open Dataset`. A member cannot rename, share or delete a group dataset, make it public, or use `Edit Metadata` or `Link as Segmentation` on it. If a member ticks a group dataset under `Select` and confirms `Delete`, the toast `1 of 1 could not be deleted` shows `Not enough permissions`, and the dataset stays. Ask a site administrator.
+- People who are not members of the group see no group button in `Uploads` and no group datasets in `Library`.
+- If you see only the heading `My Files`, your account is not a member of a group space.
 
 ---
 
@@ -54,7 +56,7 @@ See [Scenes](scenes.md).
 ## Troubleshooting
 
 - **A colleague cannot see my upload**: files in `My Files` are private. Convert the file, then share the dataset, or upload to the group space.
-- **The group button is missing**: your account has no group space. Ask the site administrator.
+- **The group button is missing**: your account is not a member of a group space. Ask the site administrator.
 - **A shared dataset is not in `Library`**: look in the `Shared with me` table below the main list.
 - **A shared scene opens with fewer layers**: the datasets in it are not shared with the recipient.
 - **A message says you have viewer access and the action needs editor access**: ask the owner for the `Editor` role.

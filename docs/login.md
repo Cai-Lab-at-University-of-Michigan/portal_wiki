@@ -13,7 +13,7 @@ tags:
 2. Click `Sign Up`, under the login form.
 3. Enter `Full Name`, `Email`, `Password` and `Confirm Password`, then click `Sign Up`.
 
-You return to the login page without a message. The new account stays inactive until a site administrator activates it, so send the administrator the email address you used.
+You return to the login page without a message. The new account stays inactive until a site administrator activates it, so send the site administrator the email address you used.
 
 ---
 

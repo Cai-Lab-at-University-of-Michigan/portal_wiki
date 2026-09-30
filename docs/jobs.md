@@ -44,7 +44,7 @@ Click a row to open `Job Details`, or open its row menu in the `Actions` column.
 - `Start Job` sends a job that was created but never submitted.
 - `Restart Job` submits a stopped job again. It is offered for `PAUSED`, `CANCELED` and `FAILURE`.
 - `Cancel Job` stops a job that is `PENDING`, `STARTED` or `PAUSED`. A canceled job cannot be resumed, only restarted.
-- `Delete Job` removes the row. It is grayed out while a job is `PENDING` or `STARTED`, so cancel it first.
+- `Delete Job` removes the row, after you confirm. It is grayed out while a job is `PENDING` or `STARTED`, so cancel it first.
 
 ---
 

@@ -40,27 +40,26 @@ The viewer opens in a new window, the viewer window. See [Scene Viewer](scene-di
 | `Share Dataset` | Give people access. See [Groups and Sharing](groups-and-sharing.md). |
 | `Delete Dataset` | Remove the dataset. |
 
-You see only the entries your access allows. Members of a group can open the group's datasets. Changing, sharing or deleting them is for a site administrator.
+Which entries you see depends on your role and on who owns the dataset. On a dataset that belongs to your group, a member sees only `View Details` and `Open Dataset`. A member cannot rename, share or delete it from `Library`. Ask a site administrator. See [Groups and Sharing](groups-and-sharing.md).
 
 ---
 
 ## Delete datasets
 
 1. Open the row menu of the dataset and choose `Delete Dataset`.
-2. Read the dialog. It lists the scenes that use the dataset.
-3. If layers were derived from the dataset, for example segmentations, tick the box that confirms they are deleted too.
+2. Read the dialog. If the dataset is used in scenes, it lists them. The dataset's default scene is deleted with it. A scene you saved stays in `Scenes` without the dataset.
+3. If layers were derived from the dataset, for example segmentations, tick the box that starts with `I understand`. Without the tick, the delete is refused with `Request failed (400)` and a message about child items.
 4. Click `Delete`.
 
-The deletion is permanent. For a file you converted, the original upload is not deleted and reappears in `Uploads`. A SISF folder you added with `Add to Library` has no separate original, so deleting the dataset deletes it. An image with revisions, the rows with a `revision` badge, cannot be deleted until its revisions are deleted.
+The deletion is permanent. For a file you converted, the original upload is not deleted and reappears in `Uploads`. A SISF folder you added with `Add to Library` has no separate original, so deleting the dataset deletes it. An image that has revisions cannot be deleted. The revisions are the rows with a `revision` badge. The delete is refused with `Request failed (409)`, so delete the revisions first.
 
-To delete several datasets, click `Select`, tick the rows, and click `Delete`. The `Shared with me` table does not offer `Select`.
+To delete several datasets, click `Select` and tick the rows. The bar shows `N selected` and how many derived layers go with them. Click `Delete`, tick the box that starts with `I understand` if the dialog asks, and click `Delete` in the dialog. The `Shared with me` table does not offer `Select`.
 
 ---
 
 ## Troubleshooting
 
 - **The image is black**: see [Basic Image Adjustments](basic-image-adjustments.md).
-- **`Open Dataset` opens no window**: check that your browser is not blocking pop-ups for this site. The confirmation message appears even when the browser blocks the window.
 
 ---
 
